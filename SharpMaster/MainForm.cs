@@ -194,7 +194,7 @@ namespace SharpMaster
 					Log("error", "Error: {0}", ex.Message);
 				});
 			});
-			Text = string.Format("{0} - {1} https://github.com/samuelventura/SharpModbus", Text, Exe.VersionString());
+			Text = string.Format("{0} - {1} https://github.com/samuelventura/SharpMaster", Text, Exe.VersionString());
 			WrapRunner.Try(() => {
 				LoadSettings();
 			});
