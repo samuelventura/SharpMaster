@@ -247,6 +247,7 @@ namespace SharpMaster
 		void ButtonOpenSerialClick(object sender, EventArgs e)
 		{
 			var name = comboBoxSerial.Text;
+			EnableControls(false);
 			ior.Run(() => {
 				var serialPort = new SerialPort(name);
 				serial.CopyTo(serialPort);
@@ -260,7 +261,6 @@ namespace SharpMaster
 				master = new ModbusMaster(protocol);
 				SetMaster(master);
 				uir.Run(() => {
-					EnableControls(false);
 					Log("success", "Serial {0}@{1} open", name, serial.BaudRate);
 				});		
 			});	
