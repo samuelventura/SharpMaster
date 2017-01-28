@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{DF644B41-5FE1-43CE-9FED-DEEAA88C2D38}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SharpMaster</RootNamespace>
+    <AssemblyName>SharpMaster</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworkProfile />
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SharpModbus">
+      <HintPath>..\packages\SharpModbus.1.0.2\lib\net40\SharpModbus.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpTools">
+      <HintPath>..\packages\SharpTools.1.0.4\lib\net40\SharpTools.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpToolsUI">
+      <HintPath>..\packages\SharpToolsUI.1.0.5\lib\net40\SharpToolsUI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControlContext.cs" />
+    <Compile Include="ControlSettings.cs" />
+    <Compile Include="IoControl.cs" />
+    <Compile Include="MainForm.cs" />
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReadRegisterControl.cs" />
+    <Compile Include="ReadRegisterControl.Designer.cs">
+      <DependentUpon>ReadRegisterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersistedSettings.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadPointControl.cs" />
+    <Compile Include="ReadPointControl.Designer.cs">
+      <DependentUpon>ReadPointControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WrapperControl.cs" />
+    <Compile Include="WrapperControl.Designer.cs">
+      <DependentUpon>WrapperControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WritePointControl.cs" />
+    <Compile Include="WritePointControl.Designer.cs">
+      <DependentUpon>WritePointControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WriteRegisterControl.cs" />
+    <Compile Include="WriteRegisterControl.Designer.cs">
+      <DependentUpon>WriteRegisterControl.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReadPointControl.resx">
+      <DependentUpon>ReadPointControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReadRegisterControl.resx">
+      <DependentUpon>ReadRegisterControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WrapperControl.resx">
+      <DependentUpon>WrapperControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WritePointControl.resx">
+      <DependentUpon>WritePointControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WriteRegisterControl.resx">
+      <DependentUpon>WriteRegisterControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

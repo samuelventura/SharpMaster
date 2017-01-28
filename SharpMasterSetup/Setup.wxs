@@ -1,0 +1,50 @@
+﻿<?define VERSION=!(bind.FileVersion.SharpMaster.exe)?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="SharpMaster $(var.VERSION)" Language="1033" Version="$(var.VERSION)" UpgradeCode="80DD29C9-9E1D-4255-B409-B5A97B11C8B5" Manufacturer="Samuel Ventura">
+		<Package Description="RTU and TCP Modbus Terminal" Comments="Comments" InstallerVersion="200" Compressed="yes" />
+		<Icon Id="icon.ico" SourceFile="$(var.SharpMaster.ProjectDir)\icon.ico" />
+		<Property Id="ARPPRODUCTICON" Value="icon.ico" />
+		<!--
+		   Source media for the installation.  
+		    Specifies a single cab file to be embedded in the installer's .msi.  
+		  -->
+		<Media Id="1" Cabinet="contents.cab" EmbedCab="yes" CompressionLevel="high" />
+		<!-- Installation directory and files are defined in Files.wxs -->
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder" Name="Program Files">
+				<Directory Id="INSTALLDIR" Name="SharpMaster-$(var.VERSION)">
+					<Component Id="SharpMasterExe" Guid="3C257FBB-DB3D-4FB5-B961-E55836707695" DiskId="1">
+						<File Id="SharpMaster.exe" Name="SharpMaster.exe" Source="$(var.SharpMaster.TargetPath)" KeyPath="yes" />
+						<Shortcut Advertise="yes" Id="SharpMasterShortcut" Directory="DesktopFolder" Name="SharpMaster $(var.VERSION)" WorkingDirectory="INSTALLDIR" Description="RTU and TCP Modbus Terminal" Icon="SharpMasterIcon.exe">
+							<Icon Id="SharpMasterIcon.exe" SourceFile="$(var.SharpMaster.TargetPath)" />
+						</Shortcut>
+						<Shortcut Advertise="yes" Id="SharpMasterShortcut2" Directory="ProgramMenuFolder" Name="SharpMaster $(var.VERSION)" WorkingDirectory="INSTALLDIR" Description="RTU and TCP Modbus Terminal" Icon="SharpMasterIcon2.exe">
+							<Icon Id="SharpMasterIcon2.exe" SourceFile="$(var.SharpMaster.TargetPath)" />
+						</Shortcut>
+					</Component>
+					<Component Id="SharpMasterexeConfig" Guid="DF91567A-A358-4ED8-8DF3-1E3CAF268E6B" DiskId="1">
+						<File Id="SharpMaster.exe.config" Name="SharpMaster.exe.config" Source="$(var.SharpMaster.TargetDir)\SharpMaster.exe.config" KeyPath="yes" />
+					</Component>
+					<Component Id="SharpToolsDll" Guid="F5679EC7-4BCE-417B-A6AF-4CB1936AF435" DiskId="1">
+						<File Id="SharpTools.dll" Name="SharpTools.dll" Source="$(var.SharpMaster.TargetDir)\SharpTools.dll" KeyPath="yes" />
+					</Component>
+					<Component Id="SharpToolsUIDll" Guid="A6BBE3A8-F15B-4C33-BEA1-81EEDEA7F6E0" DiskId="1">
+						<File Id="SharpToolsUI.dll" Name="SharpToolsUI.dll" Source="$(var.SharpMaster.TargetDir)\SharpToolsUI.dll" KeyPath="yes" />
+					</Component>
+					<Component Id="SharpModbusDll" Guid="516683F8-6EA0-43B2-BEEA-7D0D09072404" DiskId="1">
+						<File Id="SharpModbus.dll" Name="SharpModbus.dll" Source="$(var.SharpMaster.TargetDir)\SharpModbus.dll" KeyPath="yes" />
+					</Component>
+				</Directory>
+			</Directory>
+			<Directory Id="DesktopFolder" />
+			<Directory Id="ProgramMenuFolder" />
+		</Directory>
+		<Feature Id="Cliente" Level="1">
+			<ComponentRef Id="SharpMasterExe" />
+			<ComponentRef Id="SharpMasterexeConfig" />
+			<ComponentRef Id="SharpModbusDll" />
+			<ComponentRef Id="SharpToolsDll" />
+			<ComponentRef Id="SharpToolsUIDll" />
+		</Feature>
+	</Product>
+</Wix>
