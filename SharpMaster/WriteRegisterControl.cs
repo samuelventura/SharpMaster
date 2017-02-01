@@ -51,9 +51,9 @@ namespace SharpMaster
 			var startAddress = (ushort)numericUpDownRegisterAddress.Value;
 			var registerValue = (ushort)numericUpDownRegisterValue.Value;
 			context.ioRunner.Run(() => {
-				if (context.Master == null)
-					return;
-				context.Master.WriteRegister(slaveAddress, startAddress, registerValue);
+				if (context.Master != null) {
+					context.Master.WriteRegister(slaveAddress, startAddress, registerValue);
+				}
 			});
 		}
 	}

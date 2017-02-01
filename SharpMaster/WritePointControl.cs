@@ -50,9 +50,9 @@ namespace SharpMaster
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var coilAddress = (ushort)numericUpDownStartAddress.Value;
 			context.ioRunner.Run(() => {
-				if (context.Master == null)
-					return;
-				context.Master.WriteCoil(slaveAddress, coilAddress, true);
+				if (context.Master != null) {
+					context.Master.WriteCoil(slaveAddress, coilAddress, true);
+				}
 			});	
 		}
 		
@@ -61,9 +61,9 @@ namespace SharpMaster
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var startAddress = (ushort)numericUpDownStartAddress.Value;
 			context.ioRunner.Run(() => {
-				if (context.Master == null)
-					return;
-				context.Master.WriteCoil(slaveAddress, startAddress, false);
+				if (context.Master != null) {
+					context.Master.WriteCoil(slaveAddress, startAddress, false);
+				}
 			});		
 		}
 	}

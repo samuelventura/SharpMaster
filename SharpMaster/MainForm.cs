@@ -106,6 +106,7 @@ namespace SharpMaster
 		
 		private void SetMaster(ModbusMaster current)
 		{
+			master = current;
 			foreach (var control in controls) {
 				control.SetMaster(current);
 			}
@@ -178,7 +179,6 @@ namespace SharpMaster
 		private void IoClose()
 		{
 			Disposer.Dispose(master);
-			master = null;
 			SetMaster(null);
 			uir.Run(() => {
 				EnableControls(true);               	        	
@@ -258,8 +258,7 @@ namespace SharpMaster
 					});                             	
 				});
 				var protocol = new RtuModbusProtocol(stream);
-				master = new ModbusMaster(protocol);
-				SetMaster(master);
+				SetMaster(new ModbusMaster(protocol));
 				uir.Run(() => {
 					Log("success", "Serial {0}@{1} open", name, serial.BaudRate);
 				});		
@@ -280,8 +279,7 @@ namespace SharpMaster
 					});
 				});
 				var protocol = new TcpModbusProtocol(stream);
-				master = new ModbusMaster(protocol);
-				SetMaster(master);
+				SetMaster(new ModbusMaster(protocol));
 				uir.Run(() => {
 					Log("success", "Socket {0}:{1} open", host, port);
 				});

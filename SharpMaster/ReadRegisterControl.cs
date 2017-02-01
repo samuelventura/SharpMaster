@@ -51,14 +51,14 @@ namespace SharpMaster
 			var startAddress = (ushort)numericUpDownRegisterAddress.Value;
 			var functionCode = comboBoxFunctionCode.SelectedIndex;
 			context.ioRunner.Run(() => {
-				if (context.Master == null)
-					return;
-				var value = functionCode == 0 ? 
+				if (context.Master != null) {
+					var value = functionCode == 0 ? 
 					context.Master.ReadHoldingRegister(slaveAddress, startAddress) : 
 					context.Master.ReadInputRegister(slaveAddress, startAddress);
-				context.uiRunner.Run(() => {
-					labelState.Text = value.ToString();
-				});
+					context.uiRunner.Run(() => {
+						labelState.Text = value.ToString();
+					});
+				}
 			});
 		}
 	}

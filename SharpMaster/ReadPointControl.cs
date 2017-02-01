@@ -52,15 +52,15 @@ namespace SharpMaster
 			var startAddress = (ushort)numericUpDownStartAddress.Value;
 			var functionCode = comboBoxFunctionCode.SelectedIndex;
 			context.ioRunner.Run(() => {
-				if (context.Master == null)
-					return;
-				var state = functionCode==0?
-					context.Master.ReadCoil(slaveAddress, startAddress):
+				if (context.Master != null) {
+					var state = functionCode == 0 ?
+					context.Master.ReadCoil(slaveAddress, startAddress) :
 					context.Master.ReadInput(slaveAddress, startAddress);
-				context.uiRunner.Run(() => {
-					labelState.Text = state ? "On" : "Off";
-					labelState.BackColor = state ? Color.LimeGreen : Color.Gray;
-				});
+					context.uiRunner.Run(() => {
+						labelState.Text = state ? "On" : "Off";
+						labelState.BackColor = state ? Color.LimeGreen : Color.Gray;
+					});
+				}
 			});
 		}
 	}
