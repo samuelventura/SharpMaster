@@ -1,3 +1,3 @@
 # SharpMaster
-C# Modbus Terminal
+C# RTU & TCP Modbus Terminal
 ![SharpMaster](SharpMaster.png)
