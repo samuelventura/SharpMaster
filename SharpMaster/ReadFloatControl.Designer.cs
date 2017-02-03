@@ -1,14 +1,14 @@
 ﻿
 namespace SharpMaster
 {
-	partial class ReadRegisterControl
+	partial class ReadFloatControl
 	{
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label labelRegisterValue;
+		private System.Windows.Forms.Label labelFloatValue;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.NumericUpDown numericUpDownSlaveAddress;
 		private System.Windows.Forms.Button buttonRead;
@@ -41,7 +41,7 @@ namespace SharpMaster
 		{
 			this.label3 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
-			this.labelRegisterValue = new System.Windows.Forms.Label();
+			this.labelFloatValue = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.numericUpDownSlaveAddress = new System.Windows.Forms.NumericUpDown();
 			this.buttonRead = new System.Windows.Forms.Button();
@@ -75,13 +75,13 @@ namespace SharpMaster
 			// 
 			// labelState
 			// 
-			this.labelRegisterValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.labelRegisterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.labelRegisterValue.Location = new System.Drawing.Point(224, 16);
-			this.labelRegisterValue.Name = "labelState";
-			this.labelRegisterValue.Size = new System.Drawing.Size(68, 22);
-			this.labelRegisterValue.TabIndex = 19;
-			this.labelRegisterValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelFloatValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.labelFloatValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.labelFloatValue.Location = new System.Drawing.Point(224, 16);
+			this.labelFloatValue.Name = "labelState";
+			this.labelFloatValue.Size = new System.Drawing.Size(68, 22);
+			this.labelFloatValue.TabIndex = 19;
+			this.labelFloatValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// label2
 			// 
@@ -147,7 +147,7 @@ namespace SharpMaster
 			this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.label3, 3, 0);
 			this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
-			this.tableLayoutPanel1.Controls.Add(this.labelRegisterValue, 3, 1);
+			this.tableLayoutPanel1.Controls.Add(this.labelFloatValue, 3, 1);
 			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";

@@ -76,6 +76,10 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReadFloatControl.cs" />
+    <Compile Include="ReadFloatControl.Designer.cs">
+      <DependentUpon>ReadFloatControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReadRegisterControl.cs" />
     <Compile Include="ReadRegisterControl.Designer.cs">
       <DependentUpon>ReadRegisterControl.cs</DependentUpon>
@@ -95,6 +99,10 @@
     <Compile Include="WrapperControl.Designer.cs">
       <DependentUpon>WrapperControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="WriteFloatControl.cs" />
+    <Compile Include="WriteFloatControl.Designer.cs">
+      <DependentUpon>WriteFloatControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="WritePointControl.cs" />
     <Compile Include="WritePointControl.Designer.cs">
       <DependentUpon>WritePointControl.cs</DependentUpon>
@@ -112,6 +120,9 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReadFloatControl.resx">
+      <DependentUpon>ReadFloatControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReadPointControl.resx">
       <DependentUpon>ReadPointControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,12 +135,18 @@
     <EmbeddedResource Include="WrapperControl.resx">
       <DependentUpon>WrapperControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WriteFloatControl.resx">
+      <DependentUpon>WriteFloatControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WritePointControl.resx">
       <DependentUpon>WritePointControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WriteRegisterControl.resx">
       <DependentUpon>WriteRegisterControl.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Incubator" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

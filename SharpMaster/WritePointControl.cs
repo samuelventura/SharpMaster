@@ -19,10 +19,8 @@ namespace SharpMaster
 			
 			InitializeComponent();
 			
-			if (settings != null) {
-				numericUpDownSlaveAddress.Value = settings.GetNumber("slaveAddress", 0);
-				numericUpDownStartAddress.Value = settings.GetNumber("startAddress", 0);
-			}
+			numericUpDownSlaveAddress.Value = settings.GetNumber("slaveAddress", 0);
+			numericUpDownStartAddress.Value = settings.GetNumber("startAddress", 0);
 			if (comboBoxFunctionCode.SelectedIndex < 0)
 				comboBoxFunctionCode.SelectedIndex = 0;
 		}

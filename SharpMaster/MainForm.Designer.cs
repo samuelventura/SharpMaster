@@ -29,6 +29,8 @@ namespace SharpMaster
 		private System.Windows.Forms.Button buttonReadRegister;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private System.Windows.Forms.Button buttonWriteFloat;
+		private System.Windows.Forms.Button buttonReadFloat;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -75,6 +77,8 @@ namespace SharpMaster
 			this.panelRight = new System.Windows.Forms.Panel();
 			this.panelContainer = new System.Windows.Forms.FlowLayoutPanel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.buttonWriteFloat = new System.Windows.Forms.Button();
+			this.buttonReadFloat = new System.Windows.Forms.Button();
 			this.panelLeft.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownTcpPort)).BeginInit();
@@ -323,7 +327,7 @@ namespace SharpMaster
 			this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelRight.Location = new System.Drawing.Point(399, 0);
 			this.panelRight.Name = "panelRight";
-			this.panelRight.Size = new System.Drawing.Size(545, 561);
+			this.panelRight.Size = new System.Drawing.Size(636, 561);
 			this.panelRight.TabIndex = 1;
 			// 
 			// panelContainer
@@ -332,9 +336,9 @@ namespace SharpMaster
 			this.panelContainer.AutoScroll = true;
 			this.panelContainer.BackColor = System.Drawing.Color.White;
 			this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelContainer.Location = new System.Drawing.Point(0, 30);
+			this.panelContainer.Location = new System.Drawing.Point(0, 32);
 			this.panelContainer.Name = "panelContainer";
-			this.panelContainer.Size = new System.Drawing.Size(545, 531);
+			this.panelContainer.Size = new System.Drawing.Size(636, 529);
 			this.panelContainer.TabIndex = 6;
 			this.panelContainer.DragDrop += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragDrop);
 			this.panelContainer.DragEnter += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragEnter);
@@ -344,7 +348,9 @@ namespace SharpMaster
 			// 
 			this.tableLayoutPanel2.AutoSize = true;
 			this.tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel2.ColumnCount = 4;
+			this.tableLayoutPanel2.ColumnCount = 6;
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -353,20 +359,42 @@ namespace SharpMaster
 			this.tableLayoutPanel2.Controls.Add(this.buttonReadPoint, 1, 1);
 			this.tableLayoutPanel2.Controls.Add(this.buttonWriteRegister, 2, 1);
 			this.tableLayoutPanel2.Controls.Add(this.buttonWritePoint, 0, 1);
+			this.tableLayoutPanel2.Controls.Add(this.buttonWriteFloat, 4, 1);
+			this.tableLayoutPanel2.Controls.Add(this.buttonReadFloat, 5, 1);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 2;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(545, 30);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(636, 32);
 			this.tableLayoutPanel2.TabIndex = 5;
+			// 
+			// buttonWriteFloat
+			// 
+			this.buttonWriteFloat.Location = new System.Drawing.Point(395, 3);
+			this.buttonWriteFloat.Name = "buttonWriteFloat";
+			this.buttonWriteFloat.Size = new System.Drawing.Size(94, 26);
+			this.buttonWriteFloat.TabIndex = 14;
+			this.buttonWriteFloat.Text = "Write Float";
+			this.buttonWriteFloat.UseVisualStyleBackColor = true;
+			this.buttonWriteFloat.Click += new System.EventHandler(this.ButtonWriteFloatClick);
+			// 
+			// buttonReadFloat
+			// 
+			this.buttonReadFloat.Location = new System.Drawing.Point(495, 3);
+			this.buttonReadFloat.Name = "buttonReadFloat";
+			this.buttonReadFloat.Size = new System.Drawing.Size(94, 26);
+			this.buttonReadFloat.TabIndex = 15;
+			this.buttonReadFloat.Text = "Read Float";
+			this.buttonReadFloat.UseVisualStyleBackColor = true;
+			this.buttonReadFloat.Click += new System.EventHandler(this.ButtonReadFloatClick);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(944, 561);
+			this.ClientSize = new System.Drawing.Size(1035, 561);
 			this.Controls.Add(this.panelRight);
 			this.Controls.Add(this.panelLeft);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

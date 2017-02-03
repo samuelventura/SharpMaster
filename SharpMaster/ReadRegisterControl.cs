@@ -18,11 +18,9 @@ namespace SharpMaster
 			
 			InitializeComponent();
 			
-			if (settings != null) {
-				numericUpDownSlaveAddress.Value = settings.GetNumber("slaveAddress", 0);
-				numericUpDownRegisterAddress.Value = settings.GetNumber("startAddress", 0);
-				comboBoxFunctionCode.Text = settings.GetString("functionCode", "3 Holding");
-			}
+			numericUpDownSlaveAddress.Value = settings.GetNumber("slaveAddress", 0);
+			numericUpDownRegisterAddress.Value = settings.GetNumber("startAddress", 0);
+			comboBoxFunctionCode.Text = settings.GetString("functionCode", "3 Holding");
 			if (comboBoxFunctionCode.SelectedIndex < 0)
 				comboBoxFunctionCode.SelectedIndex = 0;
 		}
@@ -56,7 +54,7 @@ namespace SharpMaster
 					context.Master.ReadHoldingRegister(slaveAddress, startAddress) : 
 					context.Master.ReadInputRegister(slaveAddress, startAddress);
 					context.uiRunner.Run(() => {
-						labelState.Text = value.ToString();
+						labelRegisterValue.Text = value.ToString();
 					});
 				}
 			});

@@ -19,11 +19,9 @@ namespace SharpMaster
 			
 			InitializeComponent();
 			
-			if (settings != null) {
-				numericUpDownSlaveAddress.Value = settings.GetNumber("slaveAddress", 0);
-				numericUpDownStartAddress.Value = settings.GetNumber("startAddress", 0);
-				comboBoxFunctionCode.Text = settings.GetString("functionCode", "1 Coil");
-			}
+			numericUpDownSlaveAddress.Value = settings.GetNumber("slaveAddress", 0);
+			numericUpDownStartAddress.Value = settings.GetNumber("startAddress", 0);
+			comboBoxFunctionCode.Text = settings.GetString("functionCode", "1 Coil");
 			if (comboBoxFunctionCode.SelectedIndex < 0)
 				comboBoxFunctionCode.SelectedIndex = 0;
 		}

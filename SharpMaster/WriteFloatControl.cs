@@ -8,11 +8,11 @@ using SharpTools;
 
 namespace SharpMaster
 {
-	public partial class WriteRegisterControl : UserControl, IoControl
+	public partial class WriteFloatControl : UserControl, IoControl
 	{
 		private readonly ControlContext context;
 		
-		public WriteRegisterControl(ControlContext context, SerializableMap settings)
+		public WriteFloatControl(ControlContext context, SerializableMap settings)
 		{
 			this.context = context;
 			
@@ -20,7 +20,7 @@ namespace SharpMaster
 			
 			numericUpDownSlaveAddress.Value = settings.GetNumber("slaveAddress", 0);
 			numericUpDownRegisterAddress.Value = settings.GetNumber("startAddress", 0);
-			numericUpDownRegisterValue.Value = settings.GetNumber("registerValue", 0);
+			numericUpDownFloatValue.Value = settings.GetNumber("floatValue", 0);
 			if (comboBoxFunctionCode.SelectedIndex < 0)
 				comboBoxFunctionCode.SelectedIndex = 0;
 		}
@@ -30,7 +30,7 @@ namespace SharpMaster
 			var settings = new SerializableMap();
 			settings.AddAny("slaveAddress", numericUpDownSlaveAddress.Value);
 			settings.AddAny("startAddress", numericUpDownRegisterAddress.Value);
-			settings.AddAny("registerValue", numericUpDownRegisterValue.Value);
+			settings.AddAny("floatValue", numericUpDownFloatValue.Value);
 			return settings;
 		}
 		
@@ -47,12 +47,24 @@ namespace SharpMaster
 		{
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var startAddress = (ushort)numericUpDownRegisterAddress.Value;
-			var registerValue = (ushort)numericUpDownRegisterValue.Value;
+			var floatValue = numericUpDownFloatValue.Value;
 			context.ioRunner.Run(() => {
 				if (context.Master != null) {
-					context.Master.WriteRegister(slaveAddress, startAddress, registerValue);
+					var value = FloatToByteArray((float)floatValue);
+					context.Master.WriteRegisters(slaveAddress, startAddress, value);
 				}
 			});
+		}
+		
+		private ushort[] FloatToByteArray(float value)
+		{
+			var bytes = BitConverter.GetBytes(value);
+			if (BitConverter.IsLittleEndian)
+				Array.Reverse(bytes);
+			return new ushort[] {
+				(ushort)((bytes[0] << 8 | bytes[1]) & 0xFFFF),
+				(ushort)((bytes[2] << 8 | bytes[3]) & 0xFFFF),
+			};
 		}
 	}
 }

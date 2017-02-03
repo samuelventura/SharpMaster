@@ -156,6 +156,10 @@ namespace SharpMaster
 					return new ReadRegisterControl(context, settings);
 				case "WriteRegisterControl":
 					return new WriteRegisterControl(context, settings);
+				case "ReadFloatControl":
+					return new ReadFloatControl(context, settings);
+				case "WriteFloatControl":
+					return new WriteFloatControl(context, settings);
 			}
 			Thrower.Throw("Unknown control name {0}", name);
 			return null;
@@ -163,6 +167,8 @@ namespace SharpMaster
 		
 		private void AddControl(string name, SerializableMap settings = null)
 		{
+			if (settings == null)
+				settings = new SerializableMap();
 			var control = CreateControl(name, settings);
 			var wrapper = new WrapperControl(control, () => {
 				ior.Run(() => {
@@ -227,6 +233,16 @@ namespace SharpMaster
 		void ButtonReadRegisterClick(object sender, EventArgs e)
 		{
 			AddControl(typeof(ReadRegisterControl).Name);
+		}
+		
+		void ButtonWriteFloatClick(object sender, EventArgs e)
+		{
+			AddControl(typeof(WriteFloatControl).Name);
+		}
+		
+		void ButtonReadFloatClick(object sender, EventArgs e)
+		{
+			AddControl(typeof(ReadFloatControl).Name);
 		}
 		
 		void LinkLabelSerialLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
