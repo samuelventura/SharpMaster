@@ -1,7 +1,9 @@
 ﻿<?define VERSION=!(bind.FileVersion.SharpMaster.exe)?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="SharpMaster $(var.VERSION)" Language="1033" Version="$(var.VERSION)" UpgradeCode="80DD29C9-9E1D-4255-B409-B5A97B11C8B5" Manufacturer="Samuel Ventura">
-		<Package Description="RTU and TCP Modbus Terminal" Comments="Comments" InstallerVersion="200" Compressed="yes" />
+	<Product Id="*" Name="SharpMaster $(var.VERSION)" Language="1033" 
+	         Version="$(var.VERSION)" UpgradeCode="80DD29C9-9E1D-4255-B409-B5A97B11C8B5" Manufacturer="Samuel Ventura">
+		<Package Description="RTU and TCP Modbus Terminal" Comments="SharpMaster is a registered trademark of Yeico" 
+		         InstallerVersion="200" Compressed="yes" />
 		<Icon Id="icon.ico" SourceFile="$(var.SharpMaster.ProjectDir)\icon.ico" />
 		<Property Id="ARPPRODUCTICON" Value="icon.ico" />
 		<!--
