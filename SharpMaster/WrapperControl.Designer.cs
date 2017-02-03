@@ -13,6 +13,8 @@ namespace SharpMaster
 		private System.Windows.Forms.Label labelTitle;
 		private System.Windows.Forms.Panel panelContainer;
 		private System.Windows.Forms.Label labelDrag;
+		private System.Windows.Forms.Label labelName;
+		private System.Windows.Forms.Label labelNameLink;
 		
 		/// <summary>
 		/// Disposes resources used by the control.
@@ -39,7 +41,9 @@ namespace SharpMaster
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.linkLabelRemove = new System.Windows.Forms.LinkLabel();
 			this.labelDrag = new System.Windows.Forms.Label();
+			this.labelNameLink = new System.Windows.Forms.Label();
 			this.panelTop = new System.Windows.Forms.Panel();
+			this.labelName = new System.Windows.Forms.Label();
 			this.labelTitle = new System.Windows.Forms.Label();
 			this.panelContainer = new System.Windows.Forms.Panel();
 			this.panelTop.SuspendLayout();
@@ -79,11 +83,28 @@ namespace SharpMaster
 			this.toolTip.SetToolTip(this.labelDrag, "Drag to reorder");
 			this.labelDrag.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LabelDragMouseDown);
 			// 
+			// labelNameLink
+			// 
+			this.labelNameLink.AutoSize = true;
+			this.labelNameLink.BackColor = System.Drawing.Color.Transparent;
+			this.labelNameLink.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.labelNameLink.Dock = System.Windows.Forms.DockStyle.Right;
+			this.labelNameLink.ForeColor = System.Drawing.Color.DodgerBlue;
+			this.labelNameLink.Location = new System.Drawing.Point(289, 4);
+			this.labelNameLink.Name = "labelNameLink";
+			this.labelNameLink.Size = new System.Drawing.Size(35, 13);
+			this.labelNameLink.TabIndex = 9;
+			this.labelNameLink.Text = "Name";
+			this.toolTip.SetToolTip(this.labelNameLink, "Click to rename");
+			this.labelNameLink.Click += new System.EventHandler(this.LabelNameLinkClick);
+			// 
 			// panelTop
 			// 
 			this.panelTop.AutoSize = true;
 			this.panelTop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.panelTop.BackColor = System.Drawing.Color.FloralWhite;
+			this.panelTop.Controls.Add(this.labelNameLink);
+			this.panelTop.Controls.Add(this.labelName);
 			this.panelTop.Controls.Add(this.labelDrag);
 			this.panelTop.Controls.Add(this.labelTitle);
 			this.panelTop.Controls.Add(this.linkLabelRemove);
@@ -94,6 +115,18 @@ namespace SharpMaster
 			this.panelTop.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
 			this.panelTop.Size = new System.Drawing.Size(434, 21);
 			this.panelTop.TabIndex = 5;
+			// 
+			// labelName
+			// 
+			this.labelName.AutoSize = true;
+			this.labelName.Dock = System.Windows.Forms.DockStyle.Right;
+			this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelName.Location = new System.Drawing.Point(324, 4);
+			this.labelName.Name = "labelName";
+			this.labelName.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
+			this.labelName.Size = new System.Drawing.Size(80, 13);
+			this.labelName.TabIndex = 8;
+			this.labelName.Text = "NO NAME";
 			// 
 			// labelTitle
 			// 

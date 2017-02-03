@@ -32,6 +32,11 @@ namespace SharpMaster
 			get { return payload; }
 		}
 		
+		public string ItemName {
+			get { return labelName.Text; }
+			set { labelName.Text = value; }
+		}
+		
 		private string SplitTitle(string text)
 		{
 			var title = text.Replace("Control", "");
@@ -53,6 +58,15 @@ namespace SharpMaster
 		void LabelDragMouseDown(object sender, MouseEventArgs e)
 		{
 			DoDragDrop(this, DragDropEffects.Move);
+		}
+		
+		void LabelNameLinkClick(object sender, EventArgs e)
+		{
+			var form = new NameForm();
+			form.ItemName = labelName.Text;
+			if (form.ShowDialog() == DialogResult.OK) {
+				labelName.Text = form.ItemName;
+			}
 		}
 	}
 }

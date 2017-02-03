@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -30,21 +29,21 @@ namespace SharpMaster
 		
 		private void RefreshSerials()
 		{
-			var current = comboBoxSerial.Text;
-			comboBoxSerial.Items.Clear();
+			var current = comboBoxSerialPortName.Text;
+			comboBoxSerialPortName.Items.Clear();
 			foreach (var name in SerialPort.GetPortNames())
-				comboBoxSerial.Items.Add(name);
-			comboBoxSerial.Text = current;
+				comboBoxSerialPortName.Items.Add(name);
+			comboBoxSerialPortName.Text = current;
 		}
 		
 		private void EnableControls(bool closed)
 		{
-			linkLabelSerial.Enabled = closed;
-			comboBoxSerial.Enabled = closed;
+			linkLabelSerialRefresh.Enabled = closed;
+			comboBoxSerialPortName.Enabled = closed;
 			buttonOpenSerial.Enabled = closed;
 			buttonSetupSerial.Enabled = closed;
-			textBoxClientHost.Enabled = closed;
-			numericUpDownClientPort.Enabled = closed;
+			textBoxTcpIP.Enabled = closed;
+			numericUpDownTcpPort.Enabled = closed;
 			buttonOpenSocket.Enabled = closed;
 			buttonClose.Enabled = !closed;
 		}
@@ -116,14 +115,16 @@ namespace SharpMaster
 		{
 			var config = new PersistedSettings();
 			config.Serial = serial;
-			config.Name = comboBoxSerial.Text;
-			config.ClientHost = textBoxClientHost.Text;
-			config.ClientPort = (int)numericUpDownClientPort.Value;
+			config.SerialPortName = comboBoxSerialPortName.Text;
+			config.TcpIP = textBoxTcpIP.Text;
+			config.TcpPort = (int)numericUpDownTcpPort.Value;
 			foreach (var control in panelContainer.Controls) {
 				var wrapper = (WrapperControl)control;
 				var payload = (IoControl)wrapper.Payload;
+				var name = wrapper.ItemName;
 				var settings = payload.GetSettings();
 				settings.Add("$Type", payload.GetType().Name);
+				settings.Add("$Name", name);
 				config.Controls.Add(settings);
 			}
 			persister.Save(SettingsPath(), config);
@@ -133,9 +134,9 @@ namespace SharpMaster
 		{
 			var config = persister.Load(SettingsPath());
 			config.Serial.CopyTo(serial);
-			comboBoxSerial.Text = config.Name;
-			textBoxClientHost.Text = config.ClientHost;
-			numericUpDownClientPort.Value = config.ClientPort;
+			comboBoxSerialPortName.Text = config.SerialPortName;
+			textBoxTcpIP.Text = config.TcpIP;
+			numericUpDownTcpPort.Value = config.TcpPort;
 			foreach (var settings in config.Controls) {
 				AddControl(settings["$Type"], settings);
 			}
@@ -168,6 +169,7 @@ namespace SharpMaster
 					controls.Remove((IoControl)control);          	        	
 				});			                                 	
 			});
+			wrapper.ItemName = settings.GetString("$Name", "NO NAME");
 			panelContainer.Controls.Add(wrapper);
 			ior.Run(() => {
 				var ioc = (IoControl)control;
@@ -230,7 +232,7 @@ namespace SharpMaster
 		void LinkLabelSerialLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			RefreshSerials();
-			comboBoxSerial.DroppedDown = true;
+			comboBoxSerialPortName.DroppedDown = true;
 		}
 		
 		void ButtonClearClick(object sender, EventArgs e)
@@ -246,7 +248,7 @@ namespace SharpMaster
 		
 		void ButtonOpenSerialClick(object sender, EventArgs e)
 		{
-			var name = comboBoxSerial.Text;
+			var name = comboBoxSerialPortName.Text;
 			EnableControls(false);
 			ior.Run(() => {
 				var serialPort = new SerialPort(name);
@@ -267,8 +269,8 @@ namespace SharpMaster
 		
 		void ButtonOpenSocketClick(object sender, EventArgs e)
 		{
-			var host = textBoxClientHost.Text;
-			var port = (int)numericUpDownClientPort.Value;
+			var host = textBoxTcpIP.Text;
+			var port = (int)numericUpDownTcpPort.Value;
 			EnableControls(false);
 			ior.Run(() => {
 				//standalone app maybe closed anytime so default timeout

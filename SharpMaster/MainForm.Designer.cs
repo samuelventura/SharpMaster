@@ -12,13 +12,13 @@ namespace SharpMaster
 		private System.Windows.Forms.Button buttonClose;
 		private System.Windows.Forms.Button buttonSetupSerial;
 		private System.Windows.Forms.Button buttonOpenSocket;
-		private System.Windows.Forms.NumericUpDown numericUpDownClientPort;
+		private System.Windows.Forms.NumericUpDown numericUpDownTcpPort;
 		private System.Windows.Forms.Label labelPort;
-		private System.Windows.Forms.TextBox textBoxClientHost;
-		private System.Windows.Forms.Label labelHost;
+		private System.Windows.Forms.TextBox textBoxTcpIP;
+		private System.Windows.Forms.Label labelIP;
 		private System.Windows.Forms.Button buttonOpenSerial;
-		private System.Windows.Forms.ComboBox comboBoxSerial;
-		private System.Windows.Forms.LinkLabel linkLabelSerial;
+		private System.Windows.Forms.ComboBox comboBoxSerialPortName;
+		private System.Windows.Forms.LinkLabel linkLabelSerialRefresh;
 		private System.Windows.Forms.RichTextBox richTextBoxLog;
 		private System.Windows.Forms.ToolTip toolTip;
 		private System.Windows.Forms.Panel panelRight;
@@ -56,12 +56,12 @@ namespace SharpMaster
 			this.panelLeft = new System.Windows.Forms.Panel();
 			this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.textBoxClientHost = new System.Windows.Forms.TextBox();
+			this.textBoxTcpIP = new System.Windows.Forms.TextBox();
 			this.labelPort = new System.Windows.Forms.Label();
-			this.linkLabelSerial = new System.Windows.Forms.LinkLabel();
-			this.comboBoxSerial = new System.Windows.Forms.ComboBox();
-			this.labelHost = new System.Windows.Forms.Label();
-			this.numericUpDownClientPort = new System.Windows.Forms.NumericUpDown();
+			this.linkLabelSerialRefresh = new System.Windows.Forms.LinkLabel();
+			this.comboBoxSerialPortName = new System.Windows.Forms.ComboBox();
+			this.labelIP = new System.Windows.Forms.Label();
+			this.numericUpDownTcpPort = new System.Windows.Forms.NumericUpDown();
 			this.buttonSetupSerial = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.buttonOpenSocket = new System.Windows.Forms.Button();
@@ -77,7 +77,7 @@ namespace SharpMaster
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.panelLeft.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownClientPort)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownTcpPort)).BeginInit();
 			this.panelRight.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
@@ -118,12 +118,12 @@ namespace SharpMaster
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.Controls.Add(this.textBoxClientHost, 1, 1);
+			this.tableLayoutPanel1.Controls.Add(this.textBoxTcpIP, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.labelPort, 3, 1);
-			this.tableLayoutPanel1.Controls.Add(this.linkLabelSerial, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.comboBoxSerial, 2, 0);
-			this.tableLayoutPanel1.Controls.Add(this.labelHost, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.numericUpDownClientPort, 4, 1);
+			this.tableLayoutPanel1.Controls.Add(this.linkLabelSerialRefresh, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.comboBoxSerialPortName, 2, 0);
+			this.tableLayoutPanel1.Controls.Add(this.labelIP, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.numericUpDownTcpPort, 4, 1);
 			this.tableLayoutPanel1.Controls.Add(this.buttonSetupSerial, 3, 0);
 			this.tableLayoutPanel1.Controls.Add(this.buttonClose, 6, 0);
 			this.tableLayoutPanel1.Controls.Add(this.buttonOpenSocket, 5, 1);
@@ -138,21 +138,21 @@ namespace SharpMaster
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(399, 65);
 			this.tableLayoutPanel1.TabIndex = 7;
 			// 
-			// textBoxClientHost
+			// textBoxTcpIP
 			// 
-			this.textBoxClientHost.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.tableLayoutPanel1.SetColumnSpan(this.textBoxClientHost, 2);
-			this.textBoxClientHost.Location = new System.Drawing.Point(37, 37);
-			this.textBoxClientHost.Margin = new System.Windows.Forms.Padding(2);
-			this.textBoxClientHost.Name = "textBoxClientHost";
-			this.textBoxClientHost.Size = new System.Drawing.Size(122, 20);
-			this.textBoxClientHost.TabIndex = 4;
+			this.textBoxTcpIP.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.tableLayoutPanel1.SetColumnSpan(this.textBoxTcpIP, 2);
+			this.textBoxTcpIP.Location = new System.Drawing.Point(25, 37);
+			this.textBoxTcpIP.Margin = new System.Windows.Forms.Padding(2);
+			this.textBoxTcpIP.Name = "textBoxTcpIP";
+			this.textBoxTcpIP.Size = new System.Drawing.Size(122, 20);
+			this.textBoxTcpIP.TabIndex = 4;
 			// 
 			// labelPort
 			// 
 			this.labelPort.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.labelPort.AutoSize = true;
-			this.labelPort.Location = new System.Drawing.Point(163, 41);
+			this.labelPort.Location = new System.Drawing.Point(162, 41);
 			this.labelPort.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.labelPort.Name = "labelPort";
 			this.labelPort.Size = new System.Drawing.Size(26, 13);
@@ -160,61 +160,61 @@ namespace SharpMaster
 			this.labelPort.Text = "Port";
 			this.labelPort.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// linkLabelSerial
+			// linkLabelSerialRefresh
 			// 
-			this.linkLabelSerial.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.linkLabelSerial.AutoSize = true;
-			this.tableLayoutPanel1.SetColumnSpan(this.linkLabelSerial, 2);
-			this.linkLabelSerial.Location = new System.Drawing.Point(4, 10);
-			this.linkLabelSerial.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.linkLabelSerial.Name = "linkLabelSerial";
-			this.linkLabelSerial.Size = new System.Drawing.Size(60, 13);
-			this.linkLabelSerial.TabIndex = 0;
-			this.linkLabelSerial.TabStop = true;
-			this.linkLabelSerial.Text = "Serial Ports";
-			this.linkLabelSerial.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelSerialLinkClicked);
+			this.linkLabelSerialRefresh.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.linkLabelSerialRefresh.AutoSize = true;
+			this.tableLayoutPanel1.SetColumnSpan(this.linkLabelSerialRefresh, 2);
+			this.linkLabelSerialRefresh.Location = new System.Drawing.Point(4, 10);
+			this.linkLabelSerialRefresh.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabelSerialRefresh.Name = "linkLabelSerialRefresh";
+			this.linkLabelSerialRefresh.Size = new System.Drawing.Size(60, 13);
+			this.linkLabelSerialRefresh.TabIndex = 0;
+			this.linkLabelSerialRefresh.TabStop = true;
+			this.linkLabelSerialRefresh.Text = "Serial Ports";
+			this.linkLabelSerialRefresh.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelSerialLinkClicked);
 			// 
-			// comboBoxSerial
+			// comboBoxSerialPortName
 			// 
-			this.comboBoxSerial.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.comboBoxSerial.FormattingEnabled = true;
-			this.comboBoxSerial.Location = new System.Drawing.Point(69, 6);
-			this.comboBoxSerial.Margin = new System.Windows.Forms.Padding(2);
-			this.comboBoxSerial.Name = "comboBoxSerial";
-			this.comboBoxSerial.Size = new System.Drawing.Size(90, 21);
-			this.comboBoxSerial.TabIndex = 1;
+			this.comboBoxSerialPortName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.comboBoxSerialPortName.FormattingEnabled = true;
+			this.comboBoxSerialPortName.Location = new System.Drawing.Point(68, 6);
+			this.comboBoxSerialPortName.Margin = new System.Windows.Forms.Padding(2);
+			this.comboBoxSerialPortName.Name = "comboBoxSerialPortName";
+			this.comboBoxSerialPortName.Size = new System.Drawing.Size(90, 21);
+			this.comboBoxSerialPortName.TabIndex = 1;
 			// 
-			// labelHost
+			// labelIP
 			// 
-			this.labelHost.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.labelHost.AutoSize = true;
-			this.labelHost.Location = new System.Drawing.Point(4, 41);
-			this.labelHost.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.labelHost.Name = "labelHost";
-			this.labelHost.Size = new System.Drawing.Size(29, 13);
-			this.labelHost.TabIndex = 3;
-			this.labelHost.Text = "Host";
-			this.labelHost.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelIP.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.labelIP.AutoSize = true;
+			this.labelIP.Location = new System.Drawing.Point(4, 41);
+			this.labelIP.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.labelIP.Name = "labelIP";
+			this.labelIP.Size = new System.Drawing.Size(17, 13);
+			this.labelIP.TabIndex = 3;
+			this.labelIP.Text = "IP";
+			this.labelIP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// numericUpDownClientPort
+			// numericUpDownTcpPort
 			// 
-			this.numericUpDownClientPort.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.numericUpDownClientPort.Location = new System.Drawing.Point(193, 37);
-			this.numericUpDownClientPort.Margin = new System.Windows.Forms.Padding(2);
-			this.numericUpDownClientPort.Maximum = new decimal(new int[] {
+			this.numericUpDownTcpPort.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.numericUpDownTcpPort.Location = new System.Drawing.Point(192, 37);
+			this.numericUpDownTcpPort.Margin = new System.Windows.Forms.Padding(2);
+			this.numericUpDownTcpPort.Maximum = new decimal(new int[] {
 			65535,
 			0,
 			0,
 			0});
-			this.numericUpDownClientPort.Name = "numericUpDownClientPort";
-			this.numericUpDownClientPort.Size = new System.Drawing.Size(57, 20);
-			this.numericUpDownClientPort.TabIndex = 6;
+			this.numericUpDownTcpPort.Name = "numericUpDownTcpPort";
+			this.numericUpDownTcpPort.Size = new System.Drawing.Size(57, 20);
+			this.numericUpDownTcpPort.TabIndex = 6;
 			// 
 			// buttonSetupSerial
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.buttonSetupSerial, 2);
 			this.buttonSetupSerial.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.buttonSetupSerial.Location = new System.Drawing.Point(163, 4);
+			this.buttonSetupSerial.Location = new System.Drawing.Point(162, 4);
 			this.buttonSetupSerial.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonSetupSerial.Name = "buttonSetupSerial";
 			this.buttonSetupSerial.Size = new System.Drawing.Size(87, 26);
@@ -226,11 +226,11 @@ namespace SharpMaster
 			// buttonClose
 			// 
 			this.buttonClose.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.buttonClose.Location = new System.Drawing.Point(323, 4);
+			this.buttonClose.Location = new System.Drawing.Point(322, 4);
 			this.buttonClose.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonClose.Name = "buttonClose";
 			this.tableLayoutPanel1.SetRowSpan(this.buttonClose, 2);
-			this.buttonClose.Size = new System.Drawing.Size(72, 57);
+			this.buttonClose.Size = new System.Drawing.Size(73, 57);
 			this.buttonClose.TabIndex = 9;
 			this.buttonClose.Text = "Close";
 			this.buttonClose.UseVisualStyleBackColor = true;
@@ -239,7 +239,7 @@ namespace SharpMaster
 			// buttonOpenSocket
 			// 
 			this.buttonOpenSocket.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.buttonOpenSocket.Location = new System.Drawing.Point(254, 34);
+			this.buttonOpenSocket.Location = new System.Drawing.Point(253, 34);
 			this.buttonOpenSocket.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonOpenSocket.Name = "buttonOpenSocket";
 			this.buttonOpenSocket.Size = new System.Drawing.Size(65, 27);
@@ -251,7 +251,7 @@ namespace SharpMaster
 			// buttonOpenSerial
 			// 
 			this.buttonOpenSerial.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.buttonOpenSerial.Location = new System.Drawing.Point(254, 4);
+			this.buttonOpenSerial.Location = new System.Drawing.Point(253, 4);
 			this.buttonOpenSerial.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonOpenSerial.Name = "buttonOpenSerial";
 			this.buttonOpenSerial.Size = new System.Drawing.Size(65, 26);
@@ -379,7 +379,7 @@ namespace SharpMaster
 			this.panelLeft.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownClientPort)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownTcpPort)).EndInit();
 			this.panelRight.ResumeLayout(false);
 			this.panelRight.PerformLayout();
 			this.tableLayoutPanel2.ResumeLayout(false);

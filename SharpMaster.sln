@@ -6,8 +6,6 @@ VisualStudioVersion = 12.0.20827.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMaster", "SharpMaster\SharpMaster.csproj", "{DF644B41-5FE1-43CE-9FED-DEEAA88C2D38}"
 EndProject
-Project("{CFEE4113-1246-4D54-95CB-156813CB8593}") = "SharpMasterSetup", "SharpMasterSetup\SharpMasterSetup.wixproj", "{7DAEAF51-6AAA-46CA-AAA2-55AD0E5E1686}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,9 +16,5 @@ Global
 		{DF644B41-5FE1-43CE-9FED-DEEAA88C2D38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF644B41-5FE1-43CE-9FED-DEEAA88C2D38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF644B41-5FE1-43CE-9FED-DEEAA88C2D38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7DAEAF51-6AAA-46CA-AAA2-55AD0E5E1686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DAEAF51-6AAA-46CA-AAA2-55AD0E5E1686}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DAEAF51-6AAA-46CA-AAA2-55AD0E5E1686}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DAEAF51-6AAA-46CA-AAA2-55AD0E5E1686}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

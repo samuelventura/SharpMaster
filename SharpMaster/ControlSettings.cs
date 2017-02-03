@@ -1,12 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace SharpMaster
 {
-	/// <summary>
-	/// Description of ControlSettings.
-	/// </summary>
 	public class ControlSettings
 	{
 		public ControlSettings()

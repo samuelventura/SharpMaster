@@ -1,13 +1,9 @@
-﻿
-using System;
+﻿using System;
 using SharpModbus;
 using SharpTools;
 
 namespace SharpMaster
 {
-	/// <summary>
-	/// Description of ControlContext.
-	/// </summary>
 	public class ControlContext
 	{
 		public IRunner ioRunner { get; set; }
