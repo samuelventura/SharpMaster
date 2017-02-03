@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SharpMaster")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("samuel.ventura@yeico.com")]
 [assembly: AssemblyProduct("SharpMaster")]
-[assembly: AssemblyCopyright("Copyright 2017")]
+[assembly: AssemblyCopyright("Copyright 2017 Samuel Ventura")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
