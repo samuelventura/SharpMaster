@@ -3,8 +3,6 @@ C# RTU & TCP Modbus Terminal
 ![SharpMaster](SharpMaster.png)
 
 ## TODO
-* Point names
-* RTU over TCP for forwarded serial ports
-* Float reading of analog channels
+* RTU over TCP for forwarded serial ports (in SharpForward instead)
 * Multi write/read point/register
 * Save/load point list to file
