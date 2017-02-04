@@ -275,8 +275,8 @@ namespace SharpMaster
 						Log(prefix, bytes, count);
 					});                             	
 				});
-				var protocol = new RtuModbusProtocol(stream);
-				SetMaster(new ModbusMaster(protocol));
+				var protocol = new RtuModbusProtocol();
+				SetMaster(new ModbusMaster(stream, protocol));
 				uir.Run(() => {
 					Log("success", "Serial {0}@{1} open", name, serial.BaudRate);
 				});		
@@ -290,14 +290,14 @@ namespace SharpMaster
 			EnableControls(false);
 			ior.Run(() => {
 				//standalone app maybe closed anytime so default timeout
-				var socket = TcpTools.ConnectWithTimeout(host, port, 400);
+				var socket = Tcp.ConnectWithTimeout(host, port, 400);
 				var stream = new SocketModbusStream(socket, 400, (prefix, bytes, count) => {
 					uir.Run(() => {
 						Log(prefix, bytes, count);
 					});
 				});
-				var protocol = new TcpModbusProtocol(stream);
-				SetMaster(new ModbusMaster(protocol));
+				var protocol = new TcpModbusProtocol();
+				SetMaster(new ModbusMaster(stream, protocol));
 				uir.Run(() => {
 					Log("success", "Socket {0}:{1} open", host, port);
 				});

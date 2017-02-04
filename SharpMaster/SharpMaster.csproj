@@ -45,10 +45,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SharpModbus">
-      <HintPath>..\packages\SharpModbus.1.0.2\lib\net40\SharpModbus.dll</HintPath>
+      <HintPath>..\packages\SharpModbus.1.0.3\lib\net40\SharpModbus.dll</HintPath>
     </Reference>
     <Reference Include="SharpTools">
-      <HintPath>..\packages\SharpTools.1.0.6\lib\net40\SharpTools.dll</HintPath>
+      <HintPath>..\packages\SharpTools.1.0.8\lib\net40\SharpTools.dll</HintPath>
     </Reference>
     <Reference Include="SharpToolsUI">
       <HintPath>..\packages\SharpToolsUI.1.0.5\lib\net40\SharpToolsUI.dll</HintPath>
