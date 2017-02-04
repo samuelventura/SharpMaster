@@ -5,3 +5,4 @@ C# RTU & TCP Modbus Terminal
 ## TODO
 * Multi write/read point/register
 * Save/load point list to file
+* Multiple persistent named tabs
