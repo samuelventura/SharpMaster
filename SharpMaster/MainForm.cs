@@ -270,12 +270,12 @@ namespace SharpMaster
 				var serialPort = new SerialPort(name);
 				serial.CopyTo(serialPort);
 				serialPort.Open();
-				var stream = new SerialModbusStream(serialPort, 400, (prefix, bytes, count) => {
+				var stream = new ModbusSerialStream(serialPort, 400, (prefix, bytes, count) => {
 					uir.Run(() => {
 						Log(prefix, bytes, count);
 					});                             	
 				});
-				var protocol = new RtuModbusProtocol();
+				var protocol = new ModbusRTUProtocol();
 				SetMaster(new ModbusMaster(stream, protocol));
 				uir.Run(() => {
 					Log("success", "Serial {0}@{1} open", name, serial.BaudRate);
@@ -291,12 +291,12 @@ namespace SharpMaster
 			ior.Run(() => {
 				//standalone app maybe closed anytime so default timeout
 				var socket = Tcp.ConnectWithTimeout(host, port, 400);
-				var stream = new SocketModbusStream(socket, 400, (prefix, bytes, count) => {
+				var stream = new ModbusSocketStream(socket, 400, (prefix, bytes, count) => {
 					uir.Run(() => {
 						Log(prefix, bytes, count);
 					});
 				});
-				var protocol = new TcpModbusProtocol();
+				var protocol = new ModbusTCPProtocol();
 				SetMaster(new ModbusMaster(stream, protocol));
 				uir.Run(() => {
 					Log("success", "Socket {0}:{1} open", host, port);
