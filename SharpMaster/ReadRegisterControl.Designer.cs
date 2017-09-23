@@ -47,8 +47,8 @@ namespace SharpMaster
 			this.buttonRead = new System.Windows.Forms.Button();
 			this.numericUpDownRegisterAddress = new System.Windows.Forms.NumericUpDown();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.label4 = new System.Windows.Forms.Label();
 			this.comboBoxFunctionCode = new System.Windows.Forms.ComboBox();
+			this.label4 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownSlaveAddress)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegisterAddress)).BeginInit();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -73,14 +73,14 @@ namespace SharpMaster
 			this.label1.Text = "Slave";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// labelState
+			// labelRegisterValue
 			// 
 			this.labelRegisterValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.labelRegisterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.labelRegisterValue.Location = new System.Drawing.Point(224, 16);
-			this.labelRegisterValue.Name = "labelState";
+			this.labelRegisterValue.Name = "labelRegisterValue";
 			this.labelRegisterValue.Size = new System.Drawing.Size(68, 22);
-			this.labelRegisterValue.TabIndex = 19;
+			this.labelRegisterValue.TabIndex = 3;
 			this.labelRegisterValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// label2
@@ -103,7 +103,7 @@ namespace SharpMaster
 			0});
 			this.numericUpDownSlaveAddress.Name = "numericUpDownSlaveAddress";
 			this.numericUpDownSlaveAddress.Size = new System.Drawing.Size(57, 20);
-			this.numericUpDownSlaveAddress.TabIndex = 15;
+			this.numericUpDownSlaveAddress.TabIndex = 1;
 			// 
 			// buttonRead
 			// 
@@ -112,7 +112,7 @@ namespace SharpMaster
 			this.buttonRead.Location = new System.Drawing.Point(298, 16);
 			this.buttonRead.Name = "buttonRead";
 			this.buttonRead.Size = new System.Drawing.Size(68, 22);
-			this.buttonRead.TabIndex = 16;
+			this.buttonRead.TabIndex = 4;
 			this.buttonRead.Text = "Read";
 			this.buttonRead.UseVisualStyleBackColor = true;
 			this.buttonRead.Click += new System.EventHandler(this.ButtonReadClick);
@@ -128,7 +128,7 @@ namespace SharpMaster
 			0});
 			this.numericUpDownRegisterAddress.Name = "numericUpDownRegisterAddress";
 			this.numericUpDownRegisterAddress.Size = new System.Drawing.Size(68, 20);
-			this.numericUpDownRegisterAddress.TabIndex = 18;
+			this.numericUpDownRegisterAddress.TabIndex = 2;
 			// 
 			// tableLayoutPanel1
 			// 
@@ -157,15 +157,6 @@ namespace SharpMaster
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(369, 41);
 			this.tableLayoutPanel1.TabIndex = 21;
 			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(3, 0);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(48, 13);
-			this.label4.TabIndex = 21;
-			this.label4.Text = "Function";
-			// 
 			// comboBoxFunctionCode
 			// 
 			this.comboBoxFunctionCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -177,7 +168,16 @@ namespace SharpMaster
 			this.comboBoxFunctionCode.Location = new System.Drawing.Point(3, 16);
 			this.comboBoxFunctionCode.Name = "comboBoxFunctionCode";
 			this.comboBoxFunctionCode.Size = new System.Drawing.Size(78, 21);
-			this.comboBoxFunctionCode.TabIndex = 22;
+			this.comboBoxFunctionCode.TabIndex = 0;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(3, 0);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(48, 13);
+			this.label4.TabIndex = 21;
+			this.label4.Text = "Function";
 			// 
 			// ReadRegisterControl
 			// 

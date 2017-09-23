@@ -75,7 +75,7 @@ namespace SharpMaster
 			0});
 			this.numericUpDownRegisterValue.Name = "numericUpDownRegisterValue";
 			this.numericUpDownRegisterValue.Size = new System.Drawing.Size(68, 20);
-			this.numericUpDownRegisterValue.TabIndex = 20;
+			this.numericUpDownRegisterValue.TabIndex = 3;
 			// 
 			// label1
 			// 
@@ -107,7 +107,7 @@ namespace SharpMaster
 			0});
 			this.numericUpDownSlaveAddress.Name = "numericUpDownSlaveAddress";
 			this.numericUpDownSlaveAddress.Size = new System.Drawing.Size(57, 20);
-			this.numericUpDownSlaveAddress.TabIndex = 15;
+			this.numericUpDownSlaveAddress.TabIndex = 1;
 			// 
 			// buttonWrite
 			// 
@@ -116,7 +116,7 @@ namespace SharpMaster
 			this.buttonWrite.Location = new System.Drawing.Point(298, 16);
 			this.buttonWrite.Name = "buttonWrite";
 			this.buttonWrite.Size = new System.Drawing.Size(68, 22);
-			this.buttonWrite.TabIndex = 16;
+			this.buttonWrite.TabIndex = 4;
 			this.buttonWrite.Text = "Write";
 			this.buttonWrite.UseVisualStyleBackColor = true;
 			this.buttonWrite.Click += new System.EventHandler(this.ButtonWriteClick);
@@ -132,7 +132,7 @@ namespace SharpMaster
 			0});
 			this.numericUpDownRegisterAddress.Name = "numericUpDownRegisterAddress";
 			this.numericUpDownRegisterAddress.Size = new System.Drawing.Size(68, 20);
-			this.numericUpDownRegisterAddress.TabIndex = 18;
+			this.numericUpDownRegisterAddress.TabIndex = 2;
 			// 
 			// tableLayoutPanel1
 			// 
@@ -171,7 +171,7 @@ namespace SharpMaster
 			this.comboBoxFunctionCode.Location = new System.Drawing.Point(3, 16);
 			this.comboBoxFunctionCode.Name = "comboBoxFunctionCode";
 			this.comboBoxFunctionCode.Size = new System.Drawing.Size(78, 21);
-			this.comboBoxFunctionCode.TabIndex = 23;
+			this.comboBoxFunctionCode.TabIndex = 0;
 			// 
 			// label4
 			// 

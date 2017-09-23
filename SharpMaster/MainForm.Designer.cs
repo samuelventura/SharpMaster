@@ -107,7 +107,7 @@ namespace SharpMaster
 			this.richTextBoxLog.Name = "richTextBoxLog";
 			this.richTextBoxLog.ReadOnly = true;
 			this.richTextBoxLog.Size = new System.Drawing.Size(399, 470);
-			this.richTextBoxLog.TabIndex = 19;
+			this.richTextBoxLog.TabIndex = 1;
 			this.richTextBoxLog.Text = "";
 			// 
 			// tableLayoutPanel1
@@ -222,7 +222,7 @@ namespace SharpMaster
 			this.buttonSetupSerial.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonSetupSerial.Name = "buttonSetupSerial";
 			this.buttonSetupSerial.Size = new System.Drawing.Size(87, 26);
-			this.buttonSetupSerial.TabIndex = 8;
+			this.buttonSetupSerial.TabIndex = 2;
 			this.buttonSetupSerial.Text = "Setup";
 			this.buttonSetupSerial.UseVisualStyleBackColor = true;
 			this.buttonSetupSerial.Click += new System.EventHandler(this.ButtonSetupSerialClick);
@@ -235,7 +235,7 @@ namespace SharpMaster
 			this.buttonClose.Name = "buttonClose";
 			this.tableLayoutPanel1.SetRowSpan(this.buttonClose, 2);
 			this.buttonClose.Size = new System.Drawing.Size(73, 57);
-			this.buttonClose.TabIndex = 9;
+			this.buttonClose.TabIndex = 8;
 			this.buttonClose.Text = "Close";
 			this.buttonClose.UseVisualStyleBackColor = true;
 			this.buttonClose.Click += new System.EventHandler(this.ButtonCloseClick);
@@ -259,7 +259,7 @@ namespace SharpMaster
 			this.buttonOpenSerial.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonOpenSerial.Name = "buttonOpenSerial";
 			this.buttonOpenSerial.Size = new System.Drawing.Size(65, 26);
-			this.buttonOpenSerial.TabIndex = 2;
+			this.buttonOpenSerial.TabIndex = 3;
 			this.buttonOpenSerial.Text = "Open";
 			this.buttonOpenSerial.UseVisualStyleBackColor = true;
 			this.buttonOpenSerial.Click += new System.EventHandler(this.ButtonOpenSerialClick);

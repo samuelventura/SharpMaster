@@ -61,7 +61,7 @@ namespace SharpMaster
 			this.linkLabelRemove.Margin = new System.Windows.Forms.Padding(0);
 			this.linkLabelRemove.Name = "linkLabelRemove";
 			this.linkLabelRemove.Size = new System.Drawing.Size(47, 13);
-			this.linkLabelRemove.TabIndex = 4;
+			this.linkLabelRemove.TabIndex = 0;
 			this.linkLabelRemove.TabStop = true;
 			this.linkLabelRemove.Text = "Remove";
 			this.linkLabelRemove.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -78,7 +78,7 @@ namespace SharpMaster
 			this.labelDrag.Location = new System.Drawing.Point(404, 4);
 			this.labelDrag.Name = "labelDrag";
 			this.labelDrag.Size = new System.Drawing.Size(30, 13);
-			this.labelDrag.TabIndex = 7;
+			this.labelDrag.TabIndex = 4;
 			this.labelDrag.Text = "Drag";
 			this.toolTip.SetToolTip(this.labelDrag, "Drag to reorder");
 			this.labelDrag.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LabelDragMouseDown);
@@ -93,7 +93,7 @@ namespace SharpMaster
 			this.labelNameLink.Location = new System.Drawing.Point(289, 4);
 			this.labelNameLink.Name = "labelNameLink";
 			this.labelNameLink.Size = new System.Drawing.Size(35, 13);
-			this.labelNameLink.TabIndex = 9;
+			this.labelNameLink.TabIndex = 2;
 			this.labelNameLink.Text = "Name";
 			this.toolTip.SetToolTip(this.labelNameLink, "Click to rename");
 			this.labelNameLink.Click += new System.EventHandler(this.LabelNameLinkClick);
@@ -114,7 +114,7 @@ namespace SharpMaster
 			this.panelTop.Name = "panelTop";
 			this.panelTop.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
 			this.panelTop.Size = new System.Drawing.Size(434, 21);
-			this.panelTop.TabIndex = 5;
+			this.panelTop.TabIndex = 0;
 			// 
 			// labelName
 			// 
@@ -125,7 +125,7 @@ namespace SharpMaster
 			this.labelName.Name = "labelName";
 			this.labelName.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
 			this.labelName.Size = new System.Drawing.Size(80, 13);
-			this.labelName.TabIndex = 8;
+			this.labelName.TabIndex = 3;
 			this.labelName.Text = "NO NAME";
 			// 
 			// labelTitle
@@ -136,7 +136,7 @@ namespace SharpMaster
 			this.labelTitle.Location = new System.Drawing.Point(47, 4);
 			this.labelTitle.Name = "labelTitle";
 			this.labelTitle.Size = new System.Drawing.Size(27, 13);
-			this.labelTitle.TabIndex = 5;
+			this.labelTitle.TabIndex = 1;
 			this.labelTitle.Text = "Title";
 			this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
@@ -146,7 +146,7 @@ namespace SharpMaster
 			this.panelContainer.Location = new System.Drawing.Point(0, 21);
 			this.panelContainer.Name = "panelContainer";
 			this.panelContainer.Size = new System.Drawing.Size(434, 76);
-			this.panelContainer.TabIndex = 6;
+			this.panelContainer.TabIndex = 1;
 			// 
 			// WrapperControl
 			// 

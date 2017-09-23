@@ -65,7 +65,7 @@ namespace SharpMaster
 			0});
 			this.numericUpDownStartAddress.Name = "numericUpDownStartAddress";
 			this.numericUpDownStartAddress.Size = new System.Drawing.Size(68, 20);
-			this.numericUpDownStartAddress.TabIndex = 17;
+			this.numericUpDownStartAddress.TabIndex = 2;
 			// 
 			// buttonRead
 			// 
@@ -74,7 +74,7 @@ namespace SharpMaster
 			this.buttonRead.Location = new System.Drawing.Point(298, 16);
 			this.buttonRead.Name = "buttonRead";
 			this.buttonRead.Size = new System.Drawing.Size(68, 22);
-			this.buttonRead.TabIndex = 15;
+			this.buttonRead.TabIndex = 4;
 			this.buttonRead.Text = "Read";
 			this.buttonRead.UseVisualStyleBackColor = true;
 			this.buttonRead.Click += new System.EventHandler(this.ButtonReadClick);
@@ -90,7 +90,7 @@ namespace SharpMaster
 			0});
 			this.numericUpDownSlaveAddress.Name = "numericUpDownSlaveAddress";
 			this.numericUpDownSlaveAddress.Size = new System.Drawing.Size(57, 20);
-			this.numericUpDownSlaveAddress.TabIndex = 14;
+			this.numericUpDownSlaveAddress.TabIndex = 1;
 			// 
 			// label2
 			// 
@@ -108,7 +108,7 @@ namespace SharpMaster
 			this.labelState.Location = new System.Drawing.Point(224, 16);
 			this.labelState.Name = "labelState";
 			this.labelState.Size = new System.Drawing.Size(68, 22);
-			this.labelState.TabIndex = 18;
+			this.labelState.TabIndex = 3;
 			this.labelState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// label1
@@ -177,7 +177,7 @@ namespace SharpMaster
 			this.comboBoxFunctionCode.Location = new System.Drawing.Point(3, 16);
 			this.comboBoxFunctionCode.Name = "comboBoxFunctionCode";
 			this.comboBoxFunctionCode.Size = new System.Drawing.Size(78, 21);
-			this.comboBoxFunctionCode.TabIndex = 21;
+			this.comboBoxFunctionCode.TabIndex = 0;
 			// 
 			// ReadPointControl
 			// 

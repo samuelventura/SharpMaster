@@ -73,7 +73,7 @@ namespace SharpMaster
 			0});
 			this.numericUpDownSlaveAddress.Name = "numericUpDownSlaveAddress";
 			this.numericUpDownSlaveAddress.Size = new System.Drawing.Size(57, 20);
-			this.numericUpDownSlaveAddress.TabIndex = 7;
+			this.numericUpDownSlaveAddress.TabIndex = 1;
 			// 
 			// label2
 			// 
@@ -91,7 +91,7 @@ namespace SharpMaster
 			this.buttonOff.Location = new System.Drawing.Point(298, 16);
 			this.buttonOff.Name = "buttonOff";
 			this.buttonOff.Size = new System.Drawing.Size(68, 22);
-			this.buttonOff.TabIndex = 9;
+			this.buttonOff.TabIndex = 4;
 			this.buttonOff.Text = "Off";
 			this.buttonOff.UseVisualStyleBackColor = true;
 			this.buttonOff.Click += new System.EventHandler(this.ButtonOffClick);
@@ -103,7 +103,7 @@ namespace SharpMaster
 			this.buttonOn.Location = new System.Drawing.Point(224, 16);
 			this.buttonOn.Name = "buttonOn";
 			this.buttonOn.Size = new System.Drawing.Size(68, 22);
-			this.buttonOn.TabIndex = 8;
+			this.buttonOn.TabIndex = 3;
 			this.buttonOn.Text = "On";
 			this.buttonOn.UseVisualStyleBackColor = true;
 			this.buttonOn.Click += new System.EventHandler(this.ButtonOnClick);
@@ -119,7 +119,7 @@ namespace SharpMaster
 			0});
 			this.numericUpDownStartAddress.Name = "numericUpDownStartAddress";
 			this.numericUpDownStartAddress.Size = new System.Drawing.Size(68, 20);
-			this.numericUpDownStartAddress.TabIndex = 11;
+			this.numericUpDownStartAddress.TabIndex = 2;
 			// 
 			// tableLayoutPanel1
 			// 
@@ -166,7 +166,7 @@ namespace SharpMaster
 			this.comboBoxFunctionCode.Location = new System.Drawing.Point(3, 16);
 			this.comboBoxFunctionCode.Name = "comboBoxFunctionCode";
 			this.comboBoxFunctionCode.Size = new System.Drawing.Size(78, 21);
-			this.comboBoxFunctionCode.TabIndex = 22;
+			this.comboBoxFunctionCode.TabIndex = 0;
 			// 
 			// WritePointControl
 			// 
