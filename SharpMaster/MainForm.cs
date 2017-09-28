@@ -98,17 +98,10 @@ namespace SharpMaster
 			return Exe.Relative(Exe.Filename() + ".xml");
 			#else
 			var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-			Directory.CreateDirectory(Path.Combine(path, Exe.Filename()));
-			return Path.Combine(path, Exe.Filename(), "config.xml");
+			var folder = Path.Combine(path, "." + Exe.Filename());
+			Directory.CreateDirectory(folder);
+			return Path.Combine(folder, "config.xml");
 			#endif
-		}
-		
-		private void SetMaster(ModbusMaster current)
-		{
-			master = current;
-			foreach (var control in controls) {
-				control.SetMaster(current);
-			}
 		}
 		
 		private void SaveSettings()
@@ -170,11 +163,7 @@ namespace SharpMaster
 			if (settings == null)
 				settings = new SerializableMap();
 			var control = CreateControl(name, settings);
-			var wrapper = new WrapperControl(control, () => {
-				ior.Run(() => {
-					controls.Remove((IoControl)control);          	        	
-				});			                                 	
-			});
+			var wrapper = new WrapperControl(control, () => ior.Run(() => controls.Remove((IoControl)control)));
 			wrapper.ItemName = settings.GetString("$Name", "NO NAME");
 			panelContainer.Controls.Add(wrapper);
 			ior.Run(() => {
@@ -184,13 +173,19 @@ namespace SharpMaster
 			});
 		}
 		
+		private void IoSetMaster(ModbusMaster current)
+		{
+			master = current;
+			foreach (var control in controls) {
+				control.SetMaster(current);
+			}
+		}
+		
 		private void IoClose()
 		{
 			Disposer.Dispose(master);
-			SetMaster(null);
-			uir.Run(() => {
-				EnableControls(true);               	        	
-			});
+			IoSetMaster(null);
+			uir.Run(() => EnableControls(true));
 		}
 		
 		void MainFormLoad(object sender, EventArgs e)
@@ -198,14 +193,10 @@ namespace SharpMaster
 			uir = new ControlRunner(this);	
 			ior = new ThreadRunner("IO", (Exception ex) => {
 				IoClose();
-				uir.Run(() => {
-					Log("error", "Error: {0}", ex.Message);
-				});
+				uir.Run(() => Log("error", "Error: {0}", ex.Message));
 			});
 			Text = string.Format("{0} - {1} https://github.com/samuelventura/SharpMaster", Text, Exe.VersionString());
-			WrapRunner.Try(() => {
-				LoadSettings();
-			});
+			WrapRunner.Try(LoadSettings);
 			RefreshSerials();
 			EnableControls(true);
 		}
@@ -270,16 +261,10 @@ namespace SharpMaster
 				var serialPort = new SerialPort(name);
 				serial.CopyTo(serialPort);
 				serialPort.Open();
-				var stream = new ModbusSerialStream(serialPort, 400, (prefix, bytes, count) => {
-					uir.Run(() => {
-						Log(prefix, bytes, count);
-					});                             	
-				});
+				var stream = new ModbusSerialStream(serialPort, 400, (prefix, bytes, count) => uir.Run(() => Log(prefix, bytes, count)));
 				var protocol = new ModbusRTUProtocol();
-				SetMaster(new ModbusMaster(stream, protocol));
-				uir.Run(() => {
-					Log("success", "Serial {0}@{1} open", name, serial.BaudRate);
-				});		
+				IoSetMaster(new ModbusMaster(stream, protocol));
+				uir.Run(() => Log("success", "Serial {0}@{1} open", name, serial.BaudRate));		
 			});	
 		}
 		
@@ -291,24 +276,16 @@ namespace SharpMaster
 			ior.Run(() => {
 				//standalone app maybe closed anytime so default timeout
 				var socket = Tcp.ConnectWithTimeout(host, port, 400);
-				var stream = new ModbusSocketStream(socket, 400, (prefix, bytes, count) => {
-					uir.Run(() => {
-						Log(prefix, bytes, count);
-					});
-				});
+				var stream = new ModbusSocketStream(socket, 400, (prefix, bytes, count) => uir.Run(() => Log(prefix, bytes, count)));
 				var protocol = new ModbusTCPProtocol();
-				SetMaster(new ModbusMaster(stream, protocol));
-				uir.Run(() => {
-					Log("success", "Socket {0}:{1} open", host, port);
-				});
+				IoSetMaster(new ModbusMaster(stream, protocol));
+				uir.Run(() => Log("success", "Socket {0}:{1} open", host, port));
 			});
 		}
 		
 		void ButtonCloseClick(object sender, EventArgs e)
 		{
-			ior.Run(() => {
-				IoClose();
-			});
+			ior.Run(IoClose);
 		}
 		
 		private void MoveTo(WrapperControl wrapper, Point point)

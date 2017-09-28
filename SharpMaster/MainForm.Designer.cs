@@ -336,9 +336,9 @@ namespace SharpMaster
 			this.panelContainer.AutoScroll = true;
 			this.panelContainer.BackColor = System.Drawing.Color.White;
 			this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelContainer.Location = new System.Drawing.Point(0, 32);
+			this.panelContainer.Location = new System.Drawing.Point(0, 30);
 			this.panelContainer.Name = "panelContainer";
-			this.panelContainer.Size = new System.Drawing.Size(636, 529);
+			this.panelContainer.Size = new System.Drawing.Size(636, 531);
 			this.panelContainer.TabIndex = 6;
 			this.panelContainer.DragDrop += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragDrop);
 			this.panelContainer.DragEnter += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragEnter);
@@ -367,12 +367,13 @@ namespace SharpMaster
 			this.tableLayoutPanel2.RowCount = 2;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(636, 32);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(636, 30);
 			this.tableLayoutPanel2.TabIndex = 5;
 			// 
 			// buttonWriteFloat
 			// 
-			this.buttonWriteFloat.Location = new System.Drawing.Point(395, 3);
+			this.buttonWriteFloat.Location = new System.Drawing.Point(394, 2);
+			this.buttonWriteFloat.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonWriteFloat.Name = "buttonWriteFloat";
 			this.buttonWriteFloat.Size = new System.Drawing.Size(94, 26);
 			this.buttonWriteFloat.TabIndex = 14;
@@ -382,7 +383,8 @@ namespace SharpMaster
 			// 
 			// buttonReadFloat
 			// 
-			this.buttonReadFloat.Location = new System.Drawing.Point(495, 3);
+			this.buttonReadFloat.Location = new System.Drawing.Point(492, 2);
+			this.buttonReadFloat.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonReadFloat.Name = "buttonReadFloat";
 			this.buttonReadFloat.Size = new System.Drawing.Size(94, 26);
 			this.buttonReadFloat.TabIndex = 15;
