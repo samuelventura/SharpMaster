@@ -12,3 +12,4 @@ C# RTU & TCP Modbus Terminal
 * Multi write/read point/register
 * Save/load point list to file
 * Multiple persistent named tabs
+* Timed polling with reconnection
