@@ -2,7 +2,6 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SharpMaster"
-#define MyAppName2 "Sharp Master"
 #define MyAppVersion "1.0.1"
 #define MyAppPublisher "Samuel Ventura"
 #define MyAppURL "https://github.com/samuelventura/SharpMaster"
@@ -35,8 +34,8 @@ Source: "{#MyAppName}\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion rec
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{#MyAppName2} {#MyAppVersion}"; Filename: "{app}\{#MyAppName}.exe"; 
-Name: "{commondesktop}\{#MyAppName2} {#MyAppVersion}"; Filename: "{app}\{#MyAppName}.exe";
+Name: "{group}\{#MyAppName} {#MyAppVersion}"; Filename: "{app}\{#MyAppName}.exe"; 
+Name: "{commondesktop}\{#MyAppName} {#MyAppVersion}"; Filename: "{app}\{#MyAppName}.exe";
 
 
 
