@@ -25,6 +25,7 @@ OutputBaseFilename={#MyAppName}-{#MyAppVersion}.Setup
 SetupIconFile=icon.ico
 Compression=lzma
 SolidCompression=yes
+UninstallDisplayIcon={app}\{#MyAppName}.exe
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -34,7 +35,8 @@ Source: "{#MyAppName}\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion rec
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{#MyAppName2} {#MyAppVersion}"; Filename: "{app}\{#MyAppName}.exe";
+Name: "{group}\{#MyAppName2} {#MyAppVersion}"; Filename: "{app}\{#MyAppName}.exe"; 
+Name: "{commondesktop}\{#MyAppName2} {#MyAppVersion}"; Filename: "{app}\{#MyAppName}.exe";
 
 
 
