@@ -1,10 +1,8 @@
 ﻿
 using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using SharpModbus;
-using SharpTools;
+using SharpMaster.Tools;
 
 namespace SharpMaster
 {

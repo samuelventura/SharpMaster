@@ -1,6 +1,6 @@
 ﻿using System;
 using SharpModbus;
-using SharpTools;
+using SharpMaster.Tools;
 
 namespace SharpMaster
 {

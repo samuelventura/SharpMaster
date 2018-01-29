@@ -1,5 +1,4 @@
 ﻿using System;
-using SharpTools;
 using SharpModbus;
 
 namespace SharpMaster
