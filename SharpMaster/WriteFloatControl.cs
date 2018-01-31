@@ -38,9 +38,13 @@ namespace SharpMaster
 			context.uiRunner.Run(() => {
 				buttonWrite.Enabled = enabled;        	
 			});
-		}
-		
-		void ButtonWriteClick(object sender, EventArgs e)
+        }
+
+        public void Perform()
+        {
+        }
+
+        void ButtonWriteClick(object sender, EventArgs e)
 		{
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var startAddress = (ushort)numericUpDownRegisterAddress.Value;

@@ -212,6 +212,7 @@ namespace SharpMaster
             });
             RefreshSerials();
             EnableControls(true);
+            timer.Enabled = pollCheckBox.Checked;
         }
 
         void ButtonWritePointClick(object sender, EventArgs e)
@@ -323,6 +324,21 @@ namespace SharpMaster
             var wrapper = (WrapperControl)e.Data.GetData(typeof(WrapperControl));
             wrapper.BackColor = Color.White;
             MoveTo(wrapper, p);
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            foreach (var control in panelContainer.Controls)
+            {
+                var wrapper = (WrapperControl)control;
+                var payload = (IoControl)wrapper.Payload;
+                payload.Perform();
+            }
+        }
+
+        private void PollCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            timer.Enabled = pollCheckBox.Checked;
         }
     }
 }

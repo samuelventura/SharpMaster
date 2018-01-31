@@ -40,6 +40,11 @@ namespace SharpMaster
 				buttonRead.Enabled = enabled;        	
 			});
 		}
+
+        public void Perform()
+        {
+            buttonRead.PerformClick();
+        }
 		
 		void ButtonReadClick(object sender, EventArgs e)
 		{

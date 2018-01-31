@@ -39,9 +39,14 @@ namespace SharpMaster
 			context.uiRunner.Run(() => {
 				buttonRead.Enabled = enabled;        	
 			});
-		}
-		
-		void ButtonReadClick(object sender, EventArgs e)
+        }
+
+        public void Perform()
+        {
+            buttonRead.PerformClick();
+        }
+
+        void ButtonReadClick(object sender, EventArgs e)
 		{
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var startAddress = (ushort)numericUpDownStartAddress.Value;

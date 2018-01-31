@@ -37,9 +37,13 @@ namespace SharpMaster
 				buttonOff.Enabled = enabled;
 				buttonOn.Enabled = enabled;            	
 			});
-		}
-		
-		void ButtonOnClick(object sender, EventArgs e)
+        }
+
+        public void Perform()
+        {
+        }
+
+        void ButtonOnClick(object sender, EventArgs e)
 		{
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var coilAddress = (ushort)numericUpDownStartAddress.Value;

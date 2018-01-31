@@ -7,5 +7,7 @@ namespace SharpMaster
 	{
 		SerializableMap GetSettings();
 		void SetMaster(ModbusMaster master);
+
+        void Perform();
 	}
 }

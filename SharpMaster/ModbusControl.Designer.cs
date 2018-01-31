@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.panelLeft = new System.Windows.Forms.Panel();
             this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
@@ -52,6 +53,8 @@
             this.buttonWritePoint = new System.Windows.Forms.Button();
             this.buttonWriteFloat = new System.Windows.Forms.Button();
             this.buttonReadFloat = new System.Windows.Forms.Button();
+            this.pollCheckBox = new System.Windows.Forms.CheckBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -77,7 +80,7 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.panelRight);
-            this.splitContainer.Size = new System.Drawing.Size(1121, 456);
+            this.splitContainer.Size = new System.Drawing.Size(1092, 456);
             this.splitContainer.SplitterDistance = 400;
             this.splitContainer.TabIndex = 0;
             // 
@@ -279,7 +282,7 @@
             this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelRight.Location = new System.Drawing.Point(0, 0);
             this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(717, 456);
+            this.panelRight.Size = new System.Drawing.Size(688, 456);
             this.panelRight.TabIndex = 2;
             // 
             // panelContainer
@@ -290,7 +293,7 @@
             this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContainer.Location = new System.Drawing.Point(0, 30);
             this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(717, 426);
+            this.panelContainer.Size = new System.Drawing.Size(688, 426);
             this.panelContainer.TabIndex = 30;
             this.panelContainer.DragDrop += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragDrop);
             this.panelContainer.DragEnter += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragEnter);
@@ -300,31 +303,33 @@
             // 
             this.tableLayoutPanel2.AutoSize = true;
             this.tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel2.ColumnCount = 6;
+            this.tableLayoutPanel2.ColumnCount = 7;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.buttonReadRegister, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.buttonReadPoint, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.buttonWriteRegister, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.buttonWritePoint, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.buttonWriteFloat, 4, 1);
-            this.tableLayoutPanel2.Controls.Add(this.buttonReadFloat, 5, 1);
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.buttonReadRegister, 4, 1);
+            this.tableLayoutPanel2.Controls.Add(this.buttonReadPoint, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.buttonWriteRegister, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.buttonWritePoint, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.buttonWriteFloat, 5, 1);
+            this.tableLayoutPanel2.Controls.Add(this.buttonReadFloat, 6, 1);
+            this.tableLayoutPanel2.Controls.Add(this.pollCheckBox, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(717, 30);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(688, 30);
             this.tableLayoutPanel2.TabIndex = 5;
             // 
             // buttonReadRegister
             // 
-            this.buttonReadRegister.Location = new System.Drawing.Point(296, 2);
+            this.buttonReadRegister.Location = new System.Drawing.Point(377, 2);
             this.buttonReadRegister.Margin = new System.Windows.Forms.Padding(2);
             this.buttonReadRegister.Name = "buttonReadRegister";
             this.buttonReadRegister.Size = new System.Drawing.Size(94, 26);
@@ -335,7 +340,7 @@
             // 
             // buttonReadPoint
             // 
-            this.buttonReadPoint.Location = new System.Drawing.Point(100, 2);
+            this.buttonReadPoint.Location = new System.Drawing.Point(181, 2);
             this.buttonReadPoint.Margin = new System.Windows.Forms.Padding(2);
             this.buttonReadPoint.Name = "buttonReadPoint";
             this.buttonReadPoint.Size = new System.Drawing.Size(94, 26);
@@ -346,7 +351,7 @@
             // 
             // buttonWriteRegister
             // 
-            this.buttonWriteRegister.Location = new System.Drawing.Point(198, 2);
+            this.buttonWriteRegister.Location = new System.Drawing.Point(279, 2);
             this.buttonWriteRegister.Margin = new System.Windows.Forms.Padding(2);
             this.buttonWriteRegister.Name = "buttonWriteRegister";
             this.buttonWriteRegister.Size = new System.Drawing.Size(94, 26);
@@ -357,7 +362,7 @@
             // 
             // buttonWritePoint
             // 
-            this.buttonWritePoint.Location = new System.Drawing.Point(2, 2);
+            this.buttonWritePoint.Location = new System.Drawing.Point(83, 2);
             this.buttonWritePoint.Margin = new System.Windows.Forms.Padding(2);
             this.buttonWritePoint.Name = "buttonWritePoint";
             this.buttonWritePoint.Size = new System.Drawing.Size(94, 26);
@@ -368,7 +373,7 @@
             // 
             // buttonWriteFloat
             // 
-            this.buttonWriteFloat.Location = new System.Drawing.Point(394, 2);
+            this.buttonWriteFloat.Location = new System.Drawing.Point(475, 2);
             this.buttonWriteFloat.Margin = new System.Windows.Forms.Padding(2);
             this.buttonWriteFloat.Name = "buttonWriteFloat";
             this.buttonWriteFloat.Size = new System.Drawing.Size(94, 26);
@@ -379,7 +384,7 @@
             // 
             // buttonReadFloat
             // 
-            this.buttonReadFloat.Location = new System.Drawing.Point(492, 2);
+            this.buttonReadFloat.Location = new System.Drawing.Point(573, 2);
             this.buttonReadFloat.Margin = new System.Windows.Forms.Padding(2);
             this.buttonReadFloat.Name = "buttonReadFloat";
             this.buttonReadFloat.Size = new System.Drawing.Size(94, 26);
@@ -388,13 +393,30 @@
             this.buttonReadFloat.UseVisualStyleBackColor = true;
             this.buttonReadFloat.Click += new System.EventHandler(this.ButtonReadFloatClick);
             // 
+            // pollCheckBox
+            // 
+            this.pollCheckBox.AutoSize = true;
+            this.pollCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pollCheckBox.Location = new System.Drawing.Point(3, 3);
+            this.pollCheckBox.Name = "pollCheckBox";
+            this.pollCheckBox.Size = new System.Drawing.Size(75, 24);
+            this.pollCheckBox.TabIndex = 19;
+            this.pollCheckBox.Text = "Poll Inputs";
+            this.pollCheckBox.UseVisualStyleBackColor = true;
+            this.pollCheckBox.CheckedChanged += new System.EventHandler(this.PollCheckBox_CheckedChanged);
+            // 
+            // timer
+            // 
+            this.timer.Interval = 400;
+            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
+            // 
             // ModbusControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer);
             this.Name = "ModbusControl";
-            this.Size = new System.Drawing.Size(1121, 456);
+            this.Size = new System.Drawing.Size(1092, 456);
             this.Load += new System.EventHandler(this.ModbusControl_Load);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
@@ -408,6 +430,7 @@
             this.panelRight.ResumeLayout(false);
             this.panelRight.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -438,5 +461,7 @@
         private System.Windows.Forms.Button buttonWritePoint;
         private System.Windows.Forms.Button buttonWriteFloat;
         private System.Windows.Forms.Button buttonReadFloat;
+        private System.Windows.Forms.CheckBox pollCheckBox;
+        private System.Windows.Forms.Timer timer;
     }
 }
