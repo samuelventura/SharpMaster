@@ -113,7 +113,7 @@ namespace SharpMaster
             this.exportToolStripButton.Name = "exportToolStripButton";
             this.exportToolStripButton.Size = new System.Drawing.Size(44, 22);
             this.exportToolStripButton.Text = "Export";
-            this.exportToolStripButton.ToolTipText = "Export Selected Session";
+            this.exportToolStripButton.ToolTipText = "Export Selected Session to File";
             this.exportToolStripButton.Click += new System.EventHandler(this.ExportToolStripButton_Click);
             // 
             // importToolStripButton
@@ -124,7 +124,7 @@ namespace SharpMaster
             this.importToolStripButton.Name = "importToolStripButton";
             this.importToolStripButton.Size = new System.Drawing.Size(47, 22);
             this.importToolStripButton.Text = "Import";
-            this.importToolStripButton.ToolTipText = "Import Selected Session";
+            this.importToolStripButton.ToolTipText = "Import Session from File";
             this.importToolStripButton.Click += new System.EventHandler(this.ImportToolStripButton_Click);
             // 
             // toolStripSeparator1
