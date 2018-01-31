@@ -8,35 +8,38 @@ namespace SharpMaster
 {
     public class SessionDao
     {
-        private readonly LiteDatabase db;
-
-        public SessionDao()
-        {
-#if DEBUG
-            db = new LiteDatabase(Executable.Relative("sessions.db"));
-#else
-            var root = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var folder = Path.Combine(root, "SharpMaster");
-            Directory.CreateDirectory(folder);
-            db = new LiteDatabase(Path.Combine(folder, "sessions.db"));
-#endif
-        }
-
         public List<SessionSettings> Load()
         {
-            var table = db.GetCollection<SessionSettings>("sessions");
-            return new List<SessionSettings>(table.FindAll());
+            using (var db = DB())
+            { 
+                var table = db.GetCollection<SessionSettings>("sessions");
+                return new List<SessionSettings>(table.FindAll());
+            }
         }
 
         public void Save(List<SessionSettings> sessions)
         {
-            db.DropCollection("sessions");
-            var table = db.GetCollection<SessionSettings>("sessions");
-            foreach(var session in sessions)
+            using (var db = DB())
             {
-                table.Upsert(session);
+                db.DropCollection("sessions");
+                var table = db.GetCollection<SessionSettings>("sessions");
+                foreach(var session in sessions)
+                {
+                    table.Upsert(session);
+                }
             }
         }
 
+        private LiteDatabase DB()
+        {
+#if DEBUG
+            return new LiteDatabase(Executable.Relative("sessions.db"));
+#else
+            var root = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var folder = Path.Combine(root, ".SharpMaster");
+            Directory.CreateDirectory(folder);
+            return new LiteDatabase(Path.Combine(folder, "sessions.db"));
+#endif
+        }
     }
 }

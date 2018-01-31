@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.IO;
+using LiteDB;
 
 namespace SharpMaster
 {
@@ -116,6 +118,55 @@ namespace SharpMaster
                 var ModbusControl = GetTerminal(selectedPage);
                 ModbusControl.Unload();
                 tabControl.TabPages.Remove(selectedPage);
+            }
+        }
+
+        private void ExportToolStripButton_Click(object sender, EventArgs e)
+        {
+            var selectedPage = tabControl.SelectedTab;
+            if (selectedPage != null)
+            {
+                var session = new SessionSettings();
+                var ModbusControl = GetSettings(selectedPage, session);
+                var sdlg = new SaveFileDialog
+                {
+                    Title = "Export to SharpMaster File",
+                    Filter = "LiteDB Files (*.SharpMaster)|*.SharpMaster",
+                    OverwritePrompt = true,
+                    RestoreDirectory = true
+                };
+                if (sdlg.ShowDialog() == DialogResult.OK)
+                {
+                    File.Delete(sdlg.FileName);
+                    using (var db = new LiteDatabase(sdlg.FileName))
+                    {
+                        var table = db.GetCollection<SessionSettings>("sessions");
+                        table.Upsert(session);
+                    }
+                }
+            }
+        }
+
+        private void ImportToolStripButton_Click(object sender, EventArgs e)
+        {
+            var sdlg = new OpenFileDialog
+            {
+                Title = "Import from SharpMaster File",
+                Filter = "LiteDB Files (*.SharpMaster)|*.SharpMaster",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                RestoreDirectory = true
+            };
+            if (sdlg.ShowDialog() == DialogResult.OK)
+            {
+                using (var db = new LiteDatabase(sdlg.FileName))
+                {
+                    var table = db.GetCollection<SessionSettings>("sessions");
+                    foreach (var session in table.FindAll())
+                    {
+                        AddSession(session);
+                    }
+                }
             }
         }
     }
