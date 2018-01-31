@@ -35,8 +35,8 @@ namespace SharpMaster
 #if DEBUG
             return new LiteDatabase(Executable.Relative("sessions.db"));
 #else
-            var root = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            var folder = Path.Combine(root, ".SharpMaster");
+            var root = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var folder = Path.Combine(root, "SharpMaster");
             Directory.CreateDirectory(folder);
             return new LiteDatabase(Path.Combine(folder, "sessions.db"));
 #endif

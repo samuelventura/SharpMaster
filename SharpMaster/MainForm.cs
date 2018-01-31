@@ -60,7 +60,7 @@ namespace SharpMaster
 	
 		void MainFormLoad(object sender, EventArgs e)
 		{
-			Text = string.Format("SharpMaster - 1.0.1 https://github.com/samuelventura/SharpMaster");
+			Text = string.Format("SharpMaster - 1.0.2 https://github.com/samuelventura/SharpMaster");
 
             var sessions = dao.Load();
 
