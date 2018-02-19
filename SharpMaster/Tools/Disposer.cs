@@ -6,47 +6,38 @@ namespace SharpMaster.Tools
 {
     public class Disposer : IDisposable
     {
+        // SerialPort, Socket, TcpClient, Streams, Writers, Readers, ...
         public static void Dispose(object any)
         {
-            Execute(() =>
-            {
-                if (any is IDisposable)
-                {
-                    var disposable = (IDisposable)any;
-                    disposable.Dispose();
-                }
+            IgnoreException(() => {
+                if (any is IDisposable disposable) disposable.Dispose();
             });
-
-        }
-
-        // SerialPort, Socket, TcpClient, Streams, Writers, Readers, ...
-        public static void Dispose(IDisposable disposable)
-        {
-            Execute(() => { disposable?.Dispose(); });
         }
 
         // TcpListener
-        public static void Close(TcpListener closeable)
+        public static void Stop(TcpListener stoppable)
         {
-            Execute(() => { closeable?.Stop(); });
+            IgnoreException(() => {
+                stoppable?.Stop();
+            });
         }
 
-        private static void Execute(Action action)
+        public static void IgnoreException(Action action)
         {
-            try { action(); } catch (Exception) { }
+            try { action?.Invoke(); } catch (Exception) { }
         }
 
         private readonly Stack<Action> actions;
 
-        public Disposer()
+        public Disposer(params Action[] actions)
         {
-            this.actions = new Stack<Action>();
+            this.actions = new Stack<Action>(actions);
         }
 
         public void Add(IDisposable disposable)
         {
             actions.Push(() => {
-                disposable.Dispose();
+                disposable?.Dispose();
             });
         }
 
@@ -59,7 +50,7 @@ namespace SharpMaster.Tools
         {
             while (actions.Count > 0)
             {
-                Execute(actions.Pop());
+                IgnoreException(actions.Pop());
             }
         }
     }

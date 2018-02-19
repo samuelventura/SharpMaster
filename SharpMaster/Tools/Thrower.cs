@@ -6,14 +6,24 @@ namespace SharpMaster.Tools
     {
         public static void Throw(string format, params object[] args)
         {
-            var msg = args.Length > 0 ? string.Format(format, args) : format;
-            throw new Exception(msg);
+            throw Make(format, args);
         }
 
         public static void Throw(Exception inner, string format, params object[] args)
         {
-            var msg = args.Length > 0 ? string.Format(format, args) : format;
-            throw new Exception(msg, inner);
+            throw Make(inner, format, args);
+        }
+
+        public static Exception Make(string format, params object[] args)
+        {
+            var message = args.Length > 0 ? string.Format(format, args) : format;
+            return new Exception(message);
+        }
+
+        public static Exception Make(Exception inner, string format, params object[] args)
+        {
+            var message = args.Length > 0 ? string.Format(format, args) : format;
+            return new Exception(message, inner);
         }
     }
 }
