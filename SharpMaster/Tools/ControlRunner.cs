@@ -17,17 +17,8 @@ namespace SharpMaster.Tools
 
         public void Run(Action action)
         {
-            try
-            {
-                //invoke causes thread deathlocks
-                //when disposing thread runners
-                control.BeginInvoke(action);
-            }
-            catch (Exception ex)
-            {
-                try { catcher?.Invoke(ex); }
-                catch (Exception) { }
-            }
+            Action wrapper = () => { Disposer.IgnoreException(action, catcher); };
+            control.Invoke(wrapper);   
         }
     }
 }
