@@ -53,20 +53,21 @@ namespace SharpMaster
 		{
 			Parent.Controls.Remove(this);
 			action();
-		}
-		
-		void LabelDragMouseDown(object sender, MouseEventArgs e)
+        }
+
+        void LinkLabelNameClick(object sender, EventArgs e)
+        {
+            var form = new NameForm();
+            form.ItemName = labelName.Text;
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                labelName.Text = form.ItemName;
+            }
+        }
+
+        void LabelDragMouseDown(object sender, MouseEventArgs e)
 		{
 			DoDragDrop(this, DragDropEffects.Move);
-		}
-		
-		void LabelNameLinkClick(object sender, EventArgs e)
-		{
-			var form = new NameForm();
-			form.ItemName = labelName.Text;
-			if (form.ShowDialog() == DialogResult.OK) {
-				labelName.Text = form.ItemName;
-			}
 		}
 	}
 }

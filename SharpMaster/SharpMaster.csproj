@@ -95,7 +95,9 @@
     <Compile Include="ReadPointControl.Designer.cs">
       <DependentUpon>ReadPointControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="NameForm.cs" />
+    <Compile Include="NameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="NameForm.Designer.cs">
       <DependentUpon>NameForm.cs</DependentUpon>
     </Compile>
@@ -123,7 +125,9 @@
     </Compile>
     <Compile Include="Tools\Sockets.cs" />
     <Compile Include="Tools\Thrower.cs" />
-    <Compile Include="WrapperControl.cs" />
+    <Compile Include="WrapperControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="WrapperControl.Designer.cs">
       <DependentUpon>WrapperControl.cs</DependentUpon>
     </Compile>

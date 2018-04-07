@@ -58,7 +58,7 @@ namespace SharpMaster
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(224, 0);
+            this.label3.Location = new System.Drawing.Point(263, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 19;
@@ -66,14 +66,14 @@ namespace SharpMaster
             // 
             // numericUpDownFloatValue
             // 
-            this.numericUpDownFloatValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.numericUpDownFloatValue.DecimalPlaces = 2;
+            this.numericUpDownFloatValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericUpDownFloatValue.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDownFloatValue.Location = new System.Drawing.Point(224, 17);
+            this.numericUpDownFloatValue.Location = new System.Drawing.Point(263, 16);
             this.numericUpDownFloatValue.Maximum = new decimal(new int[] {
             1000000000,
             0,
@@ -85,7 +85,7 @@ namespace SharpMaster
             0,
             -2147483648});
             this.numericUpDownFloatValue.Name = "numericUpDownFloatValue";
-            this.numericUpDownFloatValue.Size = new System.Drawing.Size(68, 20);
+            this.numericUpDownFloatValue.Size = new System.Drawing.Size(94, 20);
             this.numericUpDownFloatValue.TabIndex = 3;
             this.numericUpDownFloatValue.Value = new decimal(new int[] {
             1000000000,
@@ -96,7 +96,7 @@ namespace SharpMaster
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(87, 0);
+            this.label1.Location = new System.Drawing.Point(123, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 14;
@@ -106,7 +106,7 @@ namespace SharpMaster
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(150, 0);
+            this.label2.Location = new System.Drawing.Point(203, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 17;
@@ -114,24 +114,24 @@ namespace SharpMaster
             // 
             // numericUpDownSlaveAddress
             // 
-            this.numericUpDownSlaveAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.numericUpDownSlaveAddress.Location = new System.Drawing.Point(87, 17);
+            this.numericUpDownSlaveAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericUpDownSlaveAddress.Location = new System.Drawing.Point(123, 16);
             this.numericUpDownSlaveAddress.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.numericUpDownSlaveAddress.Name = "numericUpDownSlaveAddress";
-            this.numericUpDownSlaveAddress.Size = new System.Drawing.Size(57, 20);
+            this.numericUpDownSlaveAddress.Size = new System.Drawing.Size(74, 20);
             this.numericUpDownSlaveAddress.TabIndex = 1;
             // 
             // buttonWrite
             // 
             this.buttonWrite.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonWrite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonWrite.Location = new System.Drawing.Point(298, 16);
+            this.buttonWrite.Location = new System.Drawing.Point(363, 16);
             this.buttonWrite.Name = "buttonWrite";
-            this.buttonWrite.Size = new System.Drawing.Size(68, 22);
+            this.buttonWrite.Size = new System.Drawing.Size(54, 22);
             this.buttonWrite.TabIndex = 4;
             this.buttonWrite.Text = "Write";
             this.buttonWrite.UseVisualStyleBackColor = true;
@@ -139,15 +139,15 @@ namespace SharpMaster
             // 
             // numericUpDownRegisterAddress
             // 
-            this.numericUpDownRegisterAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.numericUpDownRegisterAddress.Location = new System.Drawing.Point(150, 17);
+            this.numericUpDownRegisterAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericUpDownRegisterAddress.Location = new System.Drawing.Point(203, 16);
             this.numericUpDownRegisterAddress.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.numericUpDownRegisterAddress.Name = "numericUpDownRegisterAddress";
-            this.numericUpDownRegisterAddress.Size = new System.Drawing.Size(68, 20);
+            this.numericUpDownRegisterAddress.Size = new System.Drawing.Size(54, 20);
             this.numericUpDownRegisterAddress.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -155,11 +155,11 @@ namespace SharpMaster
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.Controls.Add(this.comboBoxFunctionCode, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.buttonWrite, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
@@ -174,19 +174,20 @@ namespace SharpMaster
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(369, 41);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(420, 41);
             this.tableLayoutPanel1.TabIndex = 21;
             // 
             // comboBoxFunctionCode
             // 
-            this.comboBoxFunctionCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxFunctionCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxFunctionCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFunctionCode.FormattingEnabled = true;
             this.comboBoxFunctionCode.Items.AddRange(new object[] {
-            "6 Holding"});
+            "6 Holding 1234",
+            "6 Holding 3412"});
             this.comboBoxFunctionCode.Location = new System.Drawing.Point(3, 16);
             this.comboBoxFunctionCode.Name = "comboBoxFunctionCode";
-            this.comboBoxFunctionCode.Size = new System.Drawing.Size(78, 21);
+            this.comboBoxFunctionCode.Size = new System.Drawing.Size(114, 21);
             this.comboBoxFunctionCode.TabIndex = 0;
             // 
             // label4
@@ -206,7 +207,7 @@ namespace SharpMaster
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "WriteFloatControl";
-            this.Size = new System.Drawing.Size(372, 44);
+            this.Size = new System.Drawing.Size(423, 44);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFloatValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSlaveAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegisterAddress)).EndInit();

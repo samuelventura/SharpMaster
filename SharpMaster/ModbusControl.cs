@@ -23,7 +23,7 @@ namespace SharpMaster
         }
         public void Unload()
         {
-            ior.Dispose(IoClose);
+            ior.Dispose(IoDispose);
         }
 
         public void FromUI(SessionSettings config)
@@ -191,9 +191,14 @@ namespace SharpMaster
             }
         }
 
-        private void IoClose()
+        private void IoDispose()
         {
             Disposer.Dispose(master);
+        }
+
+        private void IoClose()
+        {
+            IoDispose();
             IoSetMaster(null);
             uir.Run(() => EnableControls(true));
         }

@@ -46,14 +46,14 @@
             this.buttonClear = new System.Windows.Forms.Button();
             this.panelRight = new System.Windows.Forms.Panel();
             this.panelContainer = new System.Windows.Forms.FlowLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonReadRegister = new System.Windows.Forms.Button();
-            this.buttonReadPoint = new System.Windows.Forms.Button();
-            this.buttonWriteRegister = new System.Windows.Forms.Button();
-            this.buttonWritePoint = new System.Windows.Forms.Button();
-            this.buttonWriteFloat = new System.Windows.Forms.Button();
-            this.buttonReadFloat = new System.Windows.Forms.Button();
+            this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.pollCheckBox = new System.Windows.Forms.CheckBox();
+            this.buttonReadPoint = new System.Windows.Forms.Button();
+            this.buttonWritePoint = new System.Windows.Forms.Button();
+            this.buttonReadRegister = new System.Windows.Forms.Button();
+            this.buttonWriteRegister = new System.Windows.Forms.Button();
+            this.buttonReadFloat = new System.Windows.Forms.Button();
+            this.buttonWriteFloat = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -63,7 +63,7 @@
             this.tableLayoutPanelControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTcpPort)).BeginInit();
             this.panelRight.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanelButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer
@@ -278,7 +278,7 @@
             // panelRight
             // 
             this.panelRight.Controls.Add(this.panelContainer);
-            this.panelRight.Controls.Add(this.tableLayoutPanel2);
+            this.panelRight.Controls.Add(this.flowLayoutPanelButtons);
             this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelRight.Location = new System.Drawing.Point(0, 0);
             this.panelRight.Name = "panelRight";
@@ -294,116 +294,101 @@
             this.panelContainer.Location = new System.Drawing.Point(0, 30);
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(688, 426);
-            this.panelContainer.TabIndex = 30;
-            this.panelContainer.DragDrop += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragDrop);
-            this.panelContainer.DragEnter += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragEnter);
-            this.panelContainer.DragOver += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragOver);
+            this.panelContainer.TabIndex = 32;
             // 
-            // tableLayoutPanel2
+            // flowLayoutPanelButtons
             // 
-            this.tableLayoutPanel2.AutoSize = true;
-            this.tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel2.ColumnCount = 7;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.buttonReadRegister, 4, 1);
-            this.tableLayoutPanel2.Controls.Add(this.buttonReadPoint, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.buttonWriteRegister, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.buttonWritePoint, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.buttonWriteFloat, 5, 1);
-            this.tableLayoutPanel2.Controls.Add(this.buttonReadFloat, 6, 1);
-            this.tableLayoutPanel2.Controls.Add(this.pollCheckBox, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(688, 30);
-            this.tableLayoutPanel2.TabIndex = 5;
-            // 
-            // buttonReadRegister
-            // 
-            this.buttonReadRegister.Location = new System.Drawing.Point(377, 2);
-            this.buttonReadRegister.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonReadRegister.Name = "buttonReadRegister";
-            this.buttonReadRegister.Size = new System.Drawing.Size(94, 26);
-            this.buttonReadRegister.TabIndex = 23;
-            this.buttonReadRegister.Text = "Read Register";
-            this.buttonReadRegister.UseVisualStyleBackColor = true;
-            this.buttonReadRegister.Click += new System.EventHandler(this.ButtonReadRegisterClick);
-            // 
-            // buttonReadPoint
-            // 
-            this.buttonReadPoint.Location = new System.Drawing.Point(181, 2);
-            this.buttonReadPoint.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonReadPoint.Name = "buttonReadPoint";
-            this.buttonReadPoint.Size = new System.Drawing.Size(94, 26);
-            this.buttonReadPoint.TabIndex = 21;
-            this.buttonReadPoint.Text = "Read Point";
-            this.buttonReadPoint.UseVisualStyleBackColor = true;
-            this.buttonReadPoint.Click += new System.EventHandler(this.ButtonReadPointClick);
-            // 
-            // buttonWriteRegister
-            // 
-            this.buttonWriteRegister.Location = new System.Drawing.Point(279, 2);
-            this.buttonWriteRegister.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonWriteRegister.Name = "buttonWriteRegister";
-            this.buttonWriteRegister.Size = new System.Drawing.Size(94, 26);
-            this.buttonWriteRegister.TabIndex = 22;
-            this.buttonWriteRegister.Text = "Write Register";
-            this.buttonWriteRegister.UseVisualStyleBackColor = true;
-            this.buttonWriteRegister.Click += new System.EventHandler(this.ButtonWriteRegisterClick);
-            // 
-            // buttonWritePoint
-            // 
-            this.buttonWritePoint.Location = new System.Drawing.Point(83, 2);
-            this.buttonWritePoint.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonWritePoint.Name = "buttonWritePoint";
-            this.buttonWritePoint.Size = new System.Drawing.Size(94, 26);
-            this.buttonWritePoint.TabIndex = 20;
-            this.buttonWritePoint.Text = "Write Point";
-            this.buttonWritePoint.UseVisualStyleBackColor = true;
-            this.buttonWritePoint.Click += new System.EventHandler(this.ButtonWritePointClick);
-            // 
-            // buttonWriteFloat
-            // 
-            this.buttonWriteFloat.Location = new System.Drawing.Point(475, 2);
-            this.buttonWriteFloat.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonWriteFloat.Name = "buttonWriteFloat";
-            this.buttonWriteFloat.Size = new System.Drawing.Size(94, 26);
-            this.buttonWriteFloat.TabIndex = 24;
-            this.buttonWriteFloat.Text = "Write Float";
-            this.buttonWriteFloat.UseVisualStyleBackColor = true;
-            this.buttonWriteFloat.Click += new System.EventHandler(this.ButtonWriteFloatClick);
-            // 
-            // buttonReadFloat
-            // 
-            this.buttonReadFloat.Location = new System.Drawing.Point(573, 2);
-            this.buttonReadFloat.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonReadFloat.Name = "buttonReadFloat";
-            this.buttonReadFloat.Size = new System.Drawing.Size(94, 26);
-            this.buttonReadFloat.TabIndex = 25;
-            this.buttonReadFloat.Text = "Read Float";
-            this.buttonReadFloat.UseVisualStyleBackColor = true;
-            this.buttonReadFloat.Click += new System.EventHandler(this.ButtonReadFloatClick);
+            this.flowLayoutPanelButtons.AutoSize = true;
+            this.flowLayoutPanelButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelButtons.Controls.Add(this.pollCheckBox);
+            this.flowLayoutPanelButtons.Controls.Add(this.buttonReadPoint);
+            this.flowLayoutPanelButtons.Controls.Add(this.buttonWritePoint);
+            this.flowLayoutPanelButtons.Controls.Add(this.buttonReadRegister);
+            this.flowLayoutPanelButtons.Controls.Add(this.buttonWriteRegister);
+            this.flowLayoutPanelButtons.Controls.Add(this.buttonReadFloat);
+            this.flowLayoutPanelButtons.Controls.Add(this.buttonWriteFloat);
+            this.flowLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
+            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(688, 30);
+            this.flowLayoutPanelButtons.TabIndex = 31;
             // 
             // pollCheckBox
             // 
             this.pollCheckBox.AutoSize = true;
-            this.pollCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pollCheckBox.Location = new System.Drawing.Point(3, 3);
             this.pollCheckBox.Name = "pollCheckBox";
-            this.pollCheckBox.Size = new System.Drawing.Size(75, 24);
+            this.pollCheckBox.Size = new System.Drawing.Size(75, 17);
             this.pollCheckBox.TabIndex = 19;
             this.pollCheckBox.Text = "Poll Inputs";
             this.pollCheckBox.UseVisualStyleBackColor = true;
             this.pollCheckBox.CheckedChanged += new System.EventHandler(this.PollCheckBox_CheckedChanged);
+            // 
+            // buttonReadPoint
+            // 
+            this.buttonReadPoint.Location = new System.Drawing.Point(83, 2);
+            this.buttonReadPoint.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonReadPoint.Name = "buttonReadPoint";
+            this.buttonReadPoint.Size = new System.Drawing.Size(94, 26);
+            this.buttonReadPoint.TabIndex = 20;
+            this.buttonReadPoint.Text = "Read Point";
+            this.buttonReadPoint.UseVisualStyleBackColor = true;
+            this.buttonReadPoint.Click += new System.EventHandler(this.ButtonReadPointClick);
+            // 
+            // buttonWritePoint
+            // 
+            this.buttonWritePoint.Location = new System.Drawing.Point(181, 2);
+            this.buttonWritePoint.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonWritePoint.Name = "buttonWritePoint";
+            this.buttonWritePoint.Size = new System.Drawing.Size(94, 26);
+            this.buttonWritePoint.TabIndex = 21;
+            this.buttonWritePoint.Text = "Write Point";
+            this.buttonWritePoint.UseVisualStyleBackColor = true;
+            this.buttonWritePoint.Click += new System.EventHandler(this.ButtonWritePointClick);
+            // 
+            // buttonReadRegister
+            // 
+            this.buttonReadRegister.Location = new System.Drawing.Point(279, 2);
+            this.buttonReadRegister.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonReadRegister.Name = "buttonReadRegister";
+            this.buttonReadRegister.Size = new System.Drawing.Size(94, 26);
+            this.buttonReadRegister.TabIndex = 22;
+            this.buttonReadRegister.Text = "Read Register";
+            this.buttonReadRegister.UseVisualStyleBackColor = true;
+            this.buttonReadRegister.Click += new System.EventHandler(this.ButtonReadRegisterClick);
+            // 
+            // buttonWriteRegister
+            // 
+            this.buttonWriteRegister.Location = new System.Drawing.Point(377, 2);
+            this.buttonWriteRegister.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonWriteRegister.Name = "buttonWriteRegister";
+            this.buttonWriteRegister.Size = new System.Drawing.Size(94, 26);
+            this.buttonWriteRegister.TabIndex = 23;
+            this.buttonWriteRegister.Text = "Write Register";
+            this.buttonWriteRegister.UseVisualStyleBackColor = true;
+            this.buttonWriteRegister.Click += new System.EventHandler(this.ButtonWriteRegisterClick);
+            // 
+            // buttonReadFloat
+            // 
+            this.buttonReadFloat.Location = new System.Drawing.Point(475, 2);
+            this.buttonReadFloat.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonReadFloat.Name = "buttonReadFloat";
+            this.buttonReadFloat.Size = new System.Drawing.Size(94, 26);
+            this.buttonReadFloat.TabIndex = 24;
+            this.buttonReadFloat.Text = "Read Float";
+            this.buttonReadFloat.UseVisualStyleBackColor = true;
+            this.buttonReadFloat.Click += new System.EventHandler(this.ButtonReadFloatClick);
+            // 
+            // buttonWriteFloat
+            // 
+            this.buttonWriteFloat.Location = new System.Drawing.Point(573, 2);
+            this.buttonWriteFloat.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonWriteFloat.Name = "buttonWriteFloat";
+            this.buttonWriteFloat.Size = new System.Drawing.Size(94, 26);
+            this.buttonWriteFloat.TabIndex = 25;
+            this.buttonWriteFloat.Text = "Write Float";
+            this.buttonWriteFloat.UseVisualStyleBackColor = true;
+            this.buttonWriteFloat.Click += new System.EventHandler(this.ButtonWriteFloatClick);
             // 
             // timer
             // 
@@ -429,8 +414,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTcpPort)).EndInit();
             this.panelRight.ResumeLayout(false);
             this.panelRight.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.flowLayoutPanelButtons.ResumeLayout(false);
+            this.flowLayoutPanelButtons.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -453,8 +438,6 @@
         private System.Windows.Forms.Button buttonOpenSerial;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Panel panelRight;
-        private System.Windows.Forms.FlowLayoutPanel panelContainer;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button buttonReadRegister;
         private System.Windows.Forms.Button buttonReadPoint;
         private System.Windows.Forms.Button buttonWriteRegister;
@@ -463,5 +446,7 @@
         private System.Windows.Forms.Button buttonReadFloat;
         private System.Windows.Forms.CheckBox pollCheckBox;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.FlowLayoutPanel panelContainer;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons;
     }
 }

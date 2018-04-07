@@ -60,7 +60,7 @@ namespace SharpMaster
 	
 		void MainFormLoad(object sender, EventArgs e)
 		{
-			Text = string.Format("SharpMaster - 1.0.2 https://github.com/samuelventura/SharpMaster");
+			Text = string.Format("SharpMaster - 1.0.3 https://github.com/samuelventura/SharpMaster");
 
             var sessions = dao.Load();
 
@@ -115,8 +115,8 @@ namespace SharpMaster
             var selectedPage = tabControl.SelectedTab;
             if (selectedPage != null)
             {
-                var ModbusControl = GetTerminal(selectedPage);
-                ModbusControl.Unload();
+                var modbusControl = GetTerminal(selectedPage);
+                modbusControl.Unload();
                 tabControl.TabPages.Remove(selectedPage);
             }
         }

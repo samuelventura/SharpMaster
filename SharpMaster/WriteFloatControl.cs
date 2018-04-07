@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using SharpModbus;
+using SharpMaster.Tools;
 
 namespace SharpMaster
 {
@@ -18,7 +19,8 @@ namespace SharpMaster
 			numericUpDownSlaveAddress.Value = settings.GetNumber("slaveAddress", 0);
 			numericUpDownRegisterAddress.Value = settings.GetNumber("startAddress", 0);
 			numericUpDownFloatValue.Value = settings.GetNumber("floatValue", 0);
-			if (comboBoxFunctionCode.SelectedIndex < 0)
+            comboBoxFunctionCode.Text = settings.GetString("functionCode", "6 Holding 1234");
+            if (comboBoxFunctionCode.SelectedIndex < 0)
 				comboBoxFunctionCode.SelectedIndex = 0;
 		}
 		
@@ -28,7 +30,8 @@ namespace SharpMaster
 			settings.AddAny("slaveAddress", numericUpDownSlaveAddress.Value);
 			settings.AddAny("startAddress", numericUpDownRegisterAddress.Value);
 			settings.AddAny("floatValue", numericUpDownFloatValue.Value);
-			return settings;
+            settings.AddAny("functionCode", comboBoxFunctionCode.Text);
+            return settings;
 		}
 		
 		public void SetMaster(ModbusMaster master)
@@ -49,23 +52,45 @@ namespace SharpMaster
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var startAddress = (ushort)numericUpDownRegisterAddress.Value;
 			var floatValue = numericUpDownFloatValue.Value;
-			context.ioRunner.Run(() => {
+            var functionCode = comboBoxFunctionCode.SelectedIndex;
+            context.ioRunner.Run(() => {
 				if (context.Master != null) {
-					var value = FloatToByteArray((float)floatValue);
+					var value = FloatToByteArray((float)floatValue, functionCode);
 					context.Master.WriteRegisters(slaveAddress, startAddress, value);
 				}
 			});
-		}
-		
-		private ushort[] FloatToByteArray(float value)
+        }
+
+        /*
+        Modbus is Big Endian
+        Opto22 float is Big Endian
+        6 Holding 1234
+        6 Holding 3412
+        */
+
+        private ushort[] FloatToByteArray(float value, int byteOrder)
 		{
-			var bytes = BitConverter.GetBytes(value);
-			if (BitConverter.IsLittleEndian)
-				Array.Reverse(bytes);
-			return new ushort[] {
-				(ushort)((bytes[0] << 8 | bytes[1]) & 0xFFFF),
-				(ushort)((bytes[2] << 8 | bytes[3]) & 0xFFFF),
-			};
+            byte[] bytes = null;
+            switch (byteOrder)
+            {
+                case 0: //1234 opto22
+                    bytes = BitConverter.GetBytes(value);
+                    if (BitConverter.IsLittleEndian)
+                        Array.Reverse(bytes);
+                    return new ushort[] {
+                (ushort)((bytes[0] << 8 | bytes[1]) & 0xFFFF),
+                (ushort)((bytes[2] << 8 | bytes[3]) & 0xFFFF),
+            };
+                case 1: //3412 selec
+                    bytes = BitConverter.GetBytes(value);
+                    if (BitConverter.IsLittleEndian)
+                        Array.Reverse(bytes);
+                    return new ushort[] {
+                (ushort)((bytes[2] << 8 | bytes[3]) & 0xFFFF),
+                (ushort)((bytes[0] << 8 | bytes[1]) & 0xFFFF),
+            };
+            }
+            throw Thrower.Make("Invalid byte order {0}", byteOrder);
 		}
 	}
 }
