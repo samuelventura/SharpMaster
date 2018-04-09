@@ -52,7 +52,8 @@ namespace SharpMaster
 			var functionCode = comboBoxFunctionCode.SelectedIndex;
 			context.ioRunner.Run(() => {
 				if (context.Master != null) {
-					var value = functionCode == 0 ? 
+                    context.EnsureDelay();
+                    var value = functionCode == 0 ? 
 					context.Master.ReadHoldingRegister(slaveAddress, startAddress) : 
 					context.Master.ReadInputRegister(slaveAddress, startAddress);
 					context.uiRunner.Run(() => {

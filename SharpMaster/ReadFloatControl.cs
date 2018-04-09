@@ -53,12 +53,13 @@ namespace SharpMaster
 			var functionCode = comboBoxFunctionCode.SelectedIndex;
             context.ioRunner.Run(() => {
 				if (context.Master != null) {
-					var value = functionCode < 2? 
+                    context.EnsureDelay();
+                    var value = functionCode < 2? 
 					context.Master.ReadHoldingRegisters(slaveAddress, startAddress, 2) : 
 					context.Master.ReadInputRegisters(slaveAddress, startAddress, 2);
 					var floatValue = ByteArrayToFloat(value, functionCode % 2);
 					context.uiRunner.Run(() => {
-						labelFloatValue.Text = floatValue.ToString("0.00");
+						labelFloatValue.Text = floatValue.ToString("0.0000");
 					});
 				}
 			});

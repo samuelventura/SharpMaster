@@ -106,7 +106,7 @@ namespace SharpMaster
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(203, 0);
+            this.label2.Location = new System.Drawing.Point(183, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 17;
@@ -122,7 +122,7 @@ namespace SharpMaster
             0,
             0});
             this.numericUpDownSlaveAddress.Name = "numericUpDownSlaveAddress";
-            this.numericUpDownSlaveAddress.Size = new System.Drawing.Size(74, 20);
+            this.numericUpDownSlaveAddress.Size = new System.Drawing.Size(54, 20);
             this.numericUpDownSlaveAddress.TabIndex = 1;
             // 
             // buttonWrite
@@ -140,14 +140,14 @@ namespace SharpMaster
             // numericUpDownRegisterAddress
             // 
             this.numericUpDownRegisterAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericUpDownRegisterAddress.Location = new System.Drawing.Point(203, 16);
+            this.numericUpDownRegisterAddress.Location = new System.Drawing.Point(183, 16);
             this.numericUpDownRegisterAddress.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.numericUpDownRegisterAddress.Name = "numericUpDownRegisterAddress";
-            this.numericUpDownRegisterAddress.Size = new System.Drawing.Size(54, 20);
+            this.numericUpDownRegisterAddress.Size = new System.Drawing.Size(74, 20);
             this.numericUpDownRegisterAddress.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -156,8 +156,8 @@ namespace SharpMaster
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.Controls.Add(this.comboBoxFunctionCode, 0, 1);

@@ -295,6 +295,9 @@
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(688, 426);
             this.panelContainer.TabIndex = 32;
+            this.panelContainer.DragDrop += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragDrop);
+            this.panelContainer.DragEnter += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragEnter);
+            this.panelContainer.DragOver += new System.Windows.Forms.DragEventHandler(this.PanelContainerDragOver);
             // 
             // flowLayoutPanelButtons
             // 

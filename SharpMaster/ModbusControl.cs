@@ -275,7 +275,7 @@ namespace SharpMaster
                 var serialPort = new SerialPort(name);
                 serial.CopyTo(serialPort);
                 serialPort.Open();
-                var stream = new ModbusSerialStream(serialPort, 400, IoLog);
+                var stream = new ModbusSerialStream(serialPort, 1000, IoLog);
                 var protocol = new ModbusRTUProtocol();
                 IoSetMaster(new ModbusMaster(stream, protocol));
                 uir.Run(() => Log("success", "Serial {0}@{1} open", name, serial.BaudRate));
@@ -333,12 +333,18 @@ namespace SharpMaster
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            timer.Enabled = false;
             foreach (var control in panelContainer.Controls)
             {
                 var wrapper = (WrapperControl)control;
                 var payload = (IoControl)wrapper.Payload;
                 payload.Perform();
             }
+            ior.Run(()=> {
+                uir.Run(()=> {
+                    timer.Enabled = pollCheckBox.Checked;
+                });
+            });
         }
 
         private void PollCheckBox_CheckedChanged(object sender, EventArgs e)

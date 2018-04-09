@@ -60,7 +60,7 @@ namespace SharpMaster
 			var startAddress = (ushort)numericUpDownStartAddress.Value;
 			context.ioRunner.Run(() => {
 				if (context.Master != null) {
-					context.Master.WriteCoil(slaveAddress, startAddress, false);
+                    context.Master.WriteCoil(slaveAddress, startAddress, false);
 				}
 			});		
 		}

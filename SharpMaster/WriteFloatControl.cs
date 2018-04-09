@@ -55,7 +55,7 @@ namespace SharpMaster
             var functionCode = comboBoxFunctionCode.SelectedIndex;
             context.ioRunner.Run(() => {
 				if (context.Master != null) {
-					var value = FloatToByteArray((float)floatValue, functionCode);
+                    var value = FloatToByteArray((float)floatValue, functionCode);
 					context.Master.WriteRegisters(slaveAddress, startAddress, value);
 				}
 			});
