@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.IO;
-using SharpMaster.Tools;
 using Newtonsoft.Json;
 
 namespace SharpMaster
@@ -68,19 +66,15 @@ namespace SharpMaster
             var live = GetSessionList();
             var stored = sessionDao.Load();
 
-            //LiteDB fetches empty strings as null
-            var modbusControl = new ModbusControl();
-            foreach (var session in stored)
-            {
-                modbusControl.ToUI(session);
-                modbusControl.FromUI(session);
-                session.Id = 0;
-            }
+            foreach (var session in stored) session.Id = 0;
 
             var storedJSON = JsonConvert.SerializeObject(stored);
             var liveJSON = JsonConvert.SerializeObject(live);
             if (storedJSON != liveJSON)
             {
+                //System.IO.File.WriteAllText(SharpMaster.Tools.Executable.Relative("storedJSON.txt"), storedJSON);
+                //System.IO.File.WriteAllText(SharpMaster.Tools.Executable.Relative("liveJSON.txt"), liveJSON);
+
                 var result = MessageBox.Show(this, "Save changes before closing?",
                                      "Detected changes will be lost",
                                      MessageBoxButtons.YesNo, MessageBoxIcon.Warning);

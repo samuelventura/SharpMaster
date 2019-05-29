@@ -12,6 +12,7 @@ namespace SharpMaster
 
         public SessionDao(string dbPath = null)
         {
+            BsonMapper.Global.EmptyStringToNull = false;
             this.dbPath = dbPath ?? DefaultPath();
         }
 

@@ -61,7 +61,9 @@ namespace SharpMaster
             var current = comboBoxSerialPortName.Text;
             comboBoxSerialPortName.Items.Clear();
             foreach (var name in SerialPort.GetPortNames())
+            {
                 comboBoxSerialPortName.Items.Add(name);
+            }
             comboBoxSerialPortName.Text = current;
         }
 
@@ -151,10 +153,7 @@ namespace SharpMaster
 
         private void AddControl(string name, SerializableMap settings = null)
         {
-            if (settings == null)
-            {
-                settings = new SerializableMap();
-            }
+            settings = settings ?? new SerializableMap();
             var control = CreateControl(name, settings);
             var wrapper = new WrapperControl(control, () => ior.Run(() => controls.Remove((IoControl)control)))
             {
