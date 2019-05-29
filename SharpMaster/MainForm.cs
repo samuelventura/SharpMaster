@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
-using LiteDB;
+using SharpMaster.Tools;
+using Newtonsoft.Json;
 
 namespace SharpMaster
 {
 	public partial class MainForm : Form
 	{
-        private readonly SessionDao dao = new SessionDao();
+        private readonly SessionDao sessionDao;
 
-		public MainForm()
+		public MainForm(string dbPath = null)
 		{
+            sessionDao = new SessionDao(dbPath);
+
 			InitializeComponent();
-		}
+
+            toolStripStatusLabel.Text = sessionDao.DbPath;
+        }
 
         private void AddSession(SessionSettings session)
         {
@@ -21,13 +26,13 @@ namespace SharpMaster
             {
                 Text = session.Name
             };
-            var ModbusControl = new ModbusControl
+            var modbusControl = new ModbusControl
             {
                 Dock = DockStyle.Fill
             };
-            tabPage.Controls.Add(ModbusControl);
+            tabPage.Controls.Add(modbusControl);
             tabControl.TabPages.Add(tabPage);
-            ModbusControl.ToUI(session);
+            modbusControl.ToUI(session);
             tabControl.SelectedTab = tabPage;
         }
 
@@ -39,30 +44,58 @@ namespace SharpMaster
 
         private ModbusControl GetSettings(TabPage tabPage, SessionSettings session)
         {
-            var ModbusControl = GetTerminal(tabPage);
-            ModbusControl.FromUI(session);
+            var modbusControl = GetTerminal(tabPage);
+            modbusControl.FromUI(session);
             session.Name = tabPage.Text;
-            return ModbusControl;
+            return modbusControl;
+        }
+
+        private List<SessionSettings> GetSessionList()
+        {
+            var sessions = new List<SessionSettings>();
+            foreach (TabPage tabPage in tabControl.TabPages)
+            {
+                var session = new SessionSettings();
+                var modbusControl = GetSettings(tabPage, session);
+                modbusControl.Unload();
+                sessions.Add(session);
+            }
+            return sessions;
         }
 
         void MainFormFormClosed(object sender, FormClosedEventArgs e)
 		{
-            var sessions = new List<SessionSettings>();
-            foreach(TabPage tabPage in tabControl.TabPages)
+            var live = GetSessionList();
+            var stored = sessionDao.Load();
+
+            //LiteDB fetches empty strings as null
+            var modbusControl = new ModbusControl();
+            foreach (var session in stored)
             {
-                var session = new SessionSettings();
-                var ModbusControl = GetSettings(tabPage, session);
-                ModbusControl.Unload();
-                sessions.Add(session);
+                modbusControl.ToUI(session);
+                modbusControl.FromUI(session);
+                session.Id = 0;
             }
-            dao.Save(sessions);
+
+            var storedJSON = JsonConvert.SerializeObject(stored);
+            var liveJSON = JsonConvert.SerializeObject(live);
+            if (storedJSON != liveJSON)
+            {
+                var result = MessageBox.Show(this, "Save changes before closing?",
+                                     "Detected changes will be lost",
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    sessionDao.Save(live);
+                }
+            }
 		}
 	
 		void MainFormLoad(object sender, EventArgs e)
 		{
-			Text = string.Format("SharpMaster - 1.0.3 https://github.com/samuelventura/SharpMaster");
+			Text = string.Format("SharpMaster - 1.0.4 https://github.com/samuelventura/SharpMaster");
 
-            var sessions = dao.Load();
+            var sessions = sessionDao.Load();
 
             if (sessions.Count == 0)
             {
@@ -91,7 +124,7 @@ namespace SharpMaster
             if (selectedPage != null)
             {
                 var session = new SessionSettings();
-                var ModbusControl = GetSettings(selectedPage, session);
+                var modbusControl = GetSettings(selectedPage, session);
                 AddSession(session);
             }
         }
@@ -121,35 +154,50 @@ namespace SharpMaster
             }
         }
 
-        private void ExportToolStripButton_Click(object sender, EventArgs e)
+        private void ExportSelectedToolStripButton_Click(object sender, EventArgs e)
         {
             var selectedPage = tabControl.SelectedTab;
-            if (selectedPage != null)
+            if (selectedPage == null) return;
+
+            var fd = new SaveFileDialog
+            {
+                Title = "Export to SharpMaster File",
+                Filter = "LiteDB Files (*.SharpMaster)|*.SharpMaster",
+                OverwritePrompt = true,
+                RestoreDirectory = true
+            };
+            if (fd.ShowDialog() == DialogResult.OK)
             {
                 var session = new SessionSettings();
-                var ModbusControl = GetSettings(selectedPage, session);
-                var sdlg = new SaveFileDialog
-                {
-                    Title = "Export to SharpMaster File",
-                    Filter = "LiteDB Files (*.SharpMaster)|*.SharpMaster",
-                    OverwritePrompt = true,
-                    RestoreDirectory = true
-                };
-                if (sdlg.ShowDialog() == DialogResult.OK)
-                {
-                    File.Delete(sdlg.FileName);
-                    using (var db = new LiteDatabase(sdlg.FileName))
-                    {
-                        var table = db.GetCollection<SessionSettings>("sessions");
-                        table.Upsert(session);
-                    }
-                }
+                var list = new List<SessionSettings>();
+                list.Add(session);
+                GetSettings(selectedPage, session);
+                var dao = new SessionDao(fd.FileName);
+                dao.Save(list);
+            }
+        }
+
+        private void ExportAllToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (tabControl.TabPages.Count == 0) return;
+
+            var fd = new SaveFileDialog
+            {
+                Title = "Export to SharpMaster File",
+                Filter = "LiteDB Files (*.SharpMaster)|*.SharpMaster",
+                OverwritePrompt = true,
+                RestoreDirectory = true
+            };
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                var dao = new SessionDao(fd.FileName);
+                dao.Save(GetSessionList());
             }
         }
 
         private void ImportToolStripButton_Click(object sender, EventArgs e)
         {
-            var sdlg = new OpenFileDialog
+            var fd = new OpenFileDialog
             {
                 Title = "Import from SharpMaster File",
                 Filter = "LiteDB Files (*.SharpMaster)|*.SharpMaster",
@@ -157,15 +205,12 @@ namespace SharpMaster
                 CheckPathExists = true,
                 RestoreDirectory = true
             };
-            if (sdlg.ShowDialog() == DialogResult.OK)
+            if (fd.ShowDialog() == DialogResult.OK)
             {
-                using (var db = new LiteDatabase(sdlg.FileName))
+                var dao = new SessionDao(fd.FileName);
+                foreach (var session in dao.Load())
                 {
-                    var table = db.GetCollection<SessionSettings>("sessions");
-                    foreach (var session in table.FindAll())
-                    {
-                        AddSession(session);
-                    }
+                    AddSession(session);
                 }
             }
         }

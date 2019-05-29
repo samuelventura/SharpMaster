@@ -27,6 +27,7 @@ namespace SharpMaster.Tools
             var folder = Path.GetDirectoryName(entry);
             return Path.Combine(folder, filename);
         }
+
         public static string Relative(string subfolder, string filename)
         {
             var entry = Assembly.GetEntryAssembly().Location;

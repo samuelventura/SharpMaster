@@ -1,13 +1,25 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using LiteDB;
 using SharpMaster.Tools;
+using LiteDB;
 
 namespace SharpMaster
 {
     public class SessionDao
     {
+        private readonly string dbPath;
+
+        public SessionDao(string dbPath = null)
+        {
+            this.dbPath = dbPath ?? DefaultPath();
+        }
+
+        public string DbPath
+        {
+            get { return dbPath;  }
+        }
+
         public List<SessionSettings> Load()
         {
             using (var db = DB())
@@ -32,13 +44,18 @@ namespace SharpMaster
 
         private LiteDatabase DB()
         {
+            return new LiteDatabase(dbPath);
+        }
+
+        private string DefaultPath()
+        {
 #if DEBUG
-            return new LiteDatabase(Executable.Relative("sessions.db"));
+            return Executable.Relative("sessions.db");
 #else
             var root = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             var folder = Path.Combine(root, "SharpMaster");
             Directory.CreateDirectory(folder);
-            return new LiteDatabase(Path.Combine(folder, "sessions.db"));
+            return Path.Combine(folder, "sessions.db");
 #endif
         }
     }

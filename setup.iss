@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SharpMaster"
-#define MyAppVersion "1.0.3"
+#define MyAppVersion "1.0.4"
 #define MyAppPublisher "Samuel Ventura"
 #define MyAppURL "https://github.com/samuelventura/SharpMaster"
 
@@ -25,6 +25,7 @@ SetupIconFile=icon.ico
 Compression=lzma
 SolidCompression=yes
 UninstallDisplayIcon={app}\{#MyAppName}.exe
+ChangesAssociations = yes
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -37,5 +38,10 @@ Source: "{#MyAppName}\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion rec
 Name: "{group}\{#MyAppName} {#MyAppVersion}"; Filename: "{app}\{#MyAppName}.exe"; 
 Name: "{commondesktop}\{#MyAppName} {#MyAppVersion}"; Filename: "{app}\{#MyAppName}.exe";
 
+[Registry]
+Root: HKCR; Subkey: ".SharpMaster";                     ValueData: "{#MyAppName}";                     Flags: uninsdeletevalue; ValueType: string;  ValueName: ""
+Root: HKCR; Subkey: "{#MyAppName}";                     ValueData: "{#MyAppName} {#MyAppVersion}";     Flags: uninsdeletekey;   ValueType: string;  ValueName: ""
+Root: HKCR; Subkey: "{#MyAppName}\DefaultIcon";         ValueData: "{app}\{#MyAppName}.exe,0";                                  ValueType: string;  ValueName: ""
+Root: HKCR; Subkey: "{#MyAppName}\shell\open\command";  ValueData: """{app}\{#MyAppName}"" ""%1""";                             ValueType: string;  ValueName: ""
 
 
