@@ -6,6 +6,10 @@ C# RTU & TCP Modbus Terminal
 
 ## TODO
 
+* Decode error packages
+* Multi-word and multi-coil support
+* Suppot Modbus ASCII (to test Laurel devices)
+* Hexadecimal address input
 * Toolbar redesign to support more types
 * Log pretty printed packet sections
 * Support little/big endian floats
