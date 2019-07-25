@@ -7,6 +7,7 @@ C# RTU & TCP Modbus Terminal
 ## TODO
 
 * Decode error packages
+* Packet builder screen
 * Multi-word and multi-coil support
 * Suppot Modbus ASCII (to test Laurel devices)
 * Hexadecimal address input
