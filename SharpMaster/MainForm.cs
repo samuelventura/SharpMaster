@@ -87,7 +87,7 @@ namespace SharpMaster
 	
 		void MainFormLoad(object sender, EventArgs e)
 		{
-			Text = string.Format("SharpMaster - 1.0.4 https://github.com/samuelventura/SharpMaster");
+			Text = string.Format("SharpMaster - 1.0.5 https://github.com/samuelventura/SharpMaster");
 
             var sessions = sessionDao.Load();
 
@@ -105,6 +105,11 @@ namespace SharpMaster
             }
 
             tabControl.SelectedIndex = 0;
+        }
+
+        private void SaveToolStripButton_Click(object sender, EventArgs e)
+        {
+            sessionDao.Save(GetSessionList());
         }
 
         private void NewToolStripButton_Click(object sender, EventArgs e)
@@ -207,6 +212,32 @@ namespace SharpMaster
                     AddSession(session);
                 }
             }
+        }
+
+        private void ShiftLeftToolStripButton_Click(object sender, EventArgs e)
+        {
+            var selectedPage = tabControl.SelectedTab;
+            if (selectedPage == null) return;
+
+            var index = tabControl.SelectedIndex;
+            tabControl.TabPages.Remove(selectedPage);
+            index--;
+            if (index < 0) index = tabControl.TabPages.Count;
+            tabControl.TabPages.Insert(index, selectedPage);
+            tabControl.SelectedTab = selectedPage;
+        }
+
+        private void ShiftRightToolStripButton_Click(object sender, EventArgs e)
+        {
+            var selectedPage = tabControl.SelectedTab;
+            if (selectedPage == null) return;
+
+            var index = tabControl.SelectedIndex;
+            tabControl.TabPages.Remove(selectedPage);
+            index++;
+            if (index > tabControl.TabPages.Count) index = 0;
+            tabControl.TabPages.Insert(index, selectedPage);
+            tabControl.SelectedTab = selectedPage;
         }
     }
 }

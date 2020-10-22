@@ -37,7 +37,9 @@ namespace SharpMaster
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.cloneToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.renameToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportAllToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.exportSelectedToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.importToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -46,8 +48,10 @@ namespace SharpMaster
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.exportAllToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ModbusControl1 = new SharpMaster.ModbusControl();
+            this.shiftRightToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.shiftLeftToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -60,6 +64,10 @@ namespace SharpMaster
             this.newToolStripButton,
             this.cloneToolStripButton,
             this.renameToolStripButton,
+            this.saveToolStripButton,
+            this.toolStripSeparator3,
+            this.shiftLeftToolStripButton,
+            this.shiftRightToolStripButton,
             this.toolStripSeparator2,
             this.exportAllToolStripButton,
             this.exportSelectedToolStripButton,
@@ -105,10 +113,32 @@ namespace SharpMaster
             this.renameToolStripButton.ToolTipText = "Rename Selected Session";
             this.renameToolStripButton.Click += new System.EventHandler(this.RenameToolStripButton_Click);
             // 
+            // saveToolStripButton
+            // 
+            this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
+            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripButton.Name = "saveToolStripButton";
+            this.saveToolStripButton.Size = new System.Drawing.Size(35, 22);
+            this.saveToolStripButton.Text = "Save";
+            this.saveToolStripButton.ToolTipText = "Save Sessions";
+            this.saveToolStripButton.Click += new System.EventHandler(this.SaveToolStripButton_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // exportAllToolStripButton
+            // 
+            this.exportAllToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.exportAllToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("exportAllToolStripButton.Image")));
+            this.exportAllToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exportAllToolStripButton.Name = "exportAllToolStripButton";
+            this.exportAllToolStripButton.Size = new System.Drawing.Size(62, 22);
+            this.exportAllToolStripButton.Text = "Export All";
+            this.exportAllToolStripButton.ToolTipText = "Export All Sessions to File";
+            this.exportAllToolStripButton.Click += new System.EventHandler(this.ExportAllToolStripButton_Click);
             // 
             // exportSelectedToolStripButton
             // 
@@ -116,7 +146,7 @@ namespace SharpMaster
             this.exportSelectedToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("exportSelectedToolStripButton.Image")));
             this.exportSelectedToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.exportSelectedToolStripButton.Name = "exportSelectedToolStripButton";
-            this.exportSelectedToolStripButton.Size = new System.Drawing.Size(91, 22);
+            this.exportSelectedToolStripButton.Size = new System.Drawing.Size(92, 22);
             this.exportSelectedToolStripButton.Text = "Export Selected";
             this.exportSelectedToolStripButton.ToolTipText = "Export Selected Session to File";
             this.exportSelectedToolStripButton.Click += new System.EventHandler(this.ExportSelectedToolStripButton_Click);
@@ -129,7 +159,7 @@ namespace SharpMaster
             this.importToolStripButton.Name = "importToolStripButton";
             this.importToolStripButton.Size = new System.Drawing.Size(47, 22);
             this.importToolStripButton.Text = "Import";
-            this.importToolStripButton.ToolTipText = "Import Session from File";
+            this.importToolStripButton.ToolTipText = "Import Sessions from File";
             this.importToolStripButton.Click += new System.EventHandler(this.ImportToolStripButton_Click);
             // 
             // toolStripSeparator1
@@ -185,17 +215,6 @@ namespace SharpMaster
             this.tabPage1.Text = "Session 1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // exportAllToolStripButton
-            // 
-            this.exportAllToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.exportAllToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("exportAllToolStripButton.Image")));
-            this.exportAllToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.exportAllToolStripButton.Name = "exportAllToolStripButton";
-            this.exportAllToolStripButton.Size = new System.Drawing.Size(61, 22);
-            this.exportAllToolStripButton.Text = "Export All";
-            this.exportAllToolStripButton.ToolTipText = "Export All Sessions to File";
-            this.exportAllToolStripButton.Click += new System.EventHandler(this.ExportAllToolStripButton_Click);
-            // 
             // ModbusControl1
             // 
             this.ModbusControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -204,6 +223,33 @@ namespace SharpMaster
             this.ModbusControl1.Name = "ModbusControl1";
             this.ModbusControl1.Size = new System.Drawing.Size(1100, 508);
             this.ModbusControl1.TabIndex = 0;
+            // 
+            // shiftRightToolStripButton
+            // 
+            this.shiftRightToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.shiftRightToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("shiftRightToolStripButton.Image")));
+            this.shiftRightToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.shiftRightToolStripButton.Name = "shiftRightToolStripButton";
+            this.shiftRightToolStripButton.Size = new System.Drawing.Size(50, 22);
+            this.shiftRightToolStripButton.Text = "Right >";
+            this.shiftRightToolStripButton.ToolTipText = "Shift Right";
+            this.shiftRightToolStripButton.Click += new System.EventHandler(this.ShiftRightToolStripButton_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // shiftLeftToolStripButton
+            // 
+            this.shiftLeftToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.shiftLeftToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("shiftLeftToolStripButton.Image")));
+            this.shiftLeftToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.shiftLeftToolStripButton.Name = "shiftLeftToolStripButton";
+            this.shiftLeftToolStripButton.Size = new System.Drawing.Size(42, 22);
+            this.shiftLeftToolStripButton.Text = "< Left";
+            this.shiftLeftToolStripButton.ToolTipText = "Shift Left";
+            this.shiftLeftToolStripButton.Click += new System.EventHandler(this.ShiftLeftToolStripButton_Click);
             // 
             // MainForm
             // 
@@ -245,5 +291,9 @@ namespace SharpMaster
         private ModbusControl ModbusControl1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolStripButton exportAllToolStripButton;
+        private System.Windows.Forms.ToolStripButton saveToolStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton shiftLeftToolStripButton;
+        private System.Windows.Forms.ToolStripButton shiftRightToolStripButton;
     }
 }
