@@ -13,9 +13,9 @@ namespace SharpMaster
 	public partial class WrapperControl : UserControl
 	{
 		private readonly Control payload;
-		private readonly Action action;
+		private readonly Action<Control> action;
 		
-		public WrapperControl(Control payload, Action action)
+		public WrapperControl(Control payload, Action<Control> action)
 		{
 			this.payload = payload;
 			this.action = action;
@@ -51,8 +51,7 @@ namespace SharpMaster
 		
 		void LinkLabelRemoveLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			Parent.Controls.Remove(this);
-			action();
+			action(this);
         }
 
         void LinkLabelNameClick(object sender, EventArgs e)

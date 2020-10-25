@@ -8,12 +8,12 @@ namespace SharpMaster
 {
 	public partial class ReadPointControl : UserControl, IoControl
 	{
-		private readonly ControlContext context;
+		private ControlContext context;
 		
 		public ReadPointControl(ControlContext context, SerializableMap settings)
 		{
 			this.context = context;
-			
+
 			InitializeComponent();
 			
 			numericUpDownSlaveAddress.Value = settings.GetNumber("slaveAddress", 0);
@@ -32,13 +32,9 @@ namespace SharpMaster
 			return settings;
 		}
 		
-		public void SetMaster(ModbusMaster master)
+		public void Enable(bool enabled)
 		{
-			context.Master = master;
-			var enabled = (master != null);
-			context.uiRunner.Run(() => {
-				buttonRead.Enabled = enabled;        	
-			});
+			buttonRead.Enabled = enabled;        	
         }
 
         public void Perform()
@@ -51,17 +47,14 @@ namespace SharpMaster
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var startAddress = (ushort)numericUpDownStartAddress.Value;
 			var functionCode = comboBoxFunctionCode.SelectedIndex;
-			context.ioRunner.Run(() => {
-				if (context.Master != null) {
-                    context.EnsureDelay();
-                    var state = functionCode == 0 ?
-					context.Master.ReadCoil(slaveAddress, startAddress) :
-					context.Master.ReadInput(slaveAddress, startAddress);
-					context.uiRunner.Run(() => {
-						labelState.Text = state ? "On" : "Off";
-						labelState.BackColor = state ? Color.LimeGreen : Color.Gray;
-					});
-				}
+			context.Io((master) => {
+                var state = functionCode == 0 ?
+				master.ReadCoil(slaveAddress, startAddress) :
+				master.ReadInput(slaveAddress, startAddress);
+				context.Ui(() => {
+					labelState.Text = state ? "On" : "Off";
+					labelState.BackColor = state ? Color.LimeGreen : Color.Gray;
+				});
 			});
 		}
 	}

@@ -1,19 +1,17 @@
-﻿
-using System;
+﻿using System;
 using System.Windows.Forms;
-using SharpModbus;
 using SharpMaster.Tools;
 
 namespace SharpMaster
 {
 	public partial class ReadFloatControl : UserControl, IoControl
 	{
-		private readonly ControlContext context;
+		private ControlContext context;
 		
 		public ReadFloatControl(ControlContext context, SerializableMap settings)
 		{
-			this.context = context;
-			
+            this.context = context;
+
 			InitializeComponent();
 			
 			numericUpDownSlaveAddress.Value = settings.GetNumber("slaveAddress", 0);
@@ -32,13 +30,9 @@ namespace SharpMaster
             return settings;
 		}
 		
-		public void SetMaster(ModbusMaster master)
+		public void Enable(bool enabled)
 		{
-			context.Master = master;
-			var enabled = (master != null);
-			context.uiRunner.Run(() => {
-				buttonRead.Enabled = enabled;        	
-			});
+			buttonRead.Enabled = enabled;        	
 		}
 
         public void Perform()
@@ -51,17 +45,14 @@ namespace SharpMaster
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var startAddress = (ushort)numericUpDownRegisterAddress.Value;
 			var functionCode = comboBoxFunctionCode.SelectedIndex;
-            context.ioRunner.Run(() => {
-				if (context.Master != null) {
-                    context.EnsureDelay();
-                    var value = functionCode < 2? 
-					context.Master.ReadHoldingRegisters(slaveAddress, startAddress, 2) : 
-					context.Master.ReadInputRegisters(slaveAddress, startAddress, 2);
-					var floatValue = ByteArrayToFloat(value, functionCode % 2);
-					context.uiRunner.Run(() => {
-						labelFloatValue.Text = floatValue.ToString("0.0000");
-					});
-				}
+            context.Io((master) => {
+                var value = functionCode < 2? 
+				master.ReadHoldingRegisters(slaveAddress, startAddress, 2) : 
+				master.ReadInputRegisters(slaveAddress, startAddress, 2);
+				var floatValue = ByteArrayToFloat(value, functionCode % 2);
+				context.Ui(() => {
+					labelFloatValue.Text = floatValue.ToString("0.0000");
+				});
 			});
         }
 

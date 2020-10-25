@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using SharpMaster.Tools;
+using SharpTabs;
 
 namespace SharpMaster
 {
-	public class SessionSettings
+	public class MasterDto : SessionDto
 	{
-        public SessionSettings()
+        public MasterDto()
         {
             Controls = new List<SerializableMap> ();
             Serial = new SerialSettings();
@@ -15,9 +16,9 @@ namespace SharpMaster
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public string SerialPortName { get; set; }
-        public string TcpIP { get; set; }
-        public int TcpPort { get; set; }
+        public string SerialPortName { get; set; } = "COM1";
+        public string TcpIP { get; set; } = "127.0.0.1";
+        public int TcpPort { get; set; } = 8000;
         public SerialSettings Serial { get; set; }
         public List<SerializableMap> Controls { get; set; }
     }

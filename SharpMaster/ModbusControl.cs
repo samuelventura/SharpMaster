@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using System.IO.Ports;
 using System.Windows.Forms;
 using SharpMaster.Tools;
-using SharpModbus;
 
 namespace SharpMaster
 {
@@ -13,25 +11,24 @@ namespace SharpMaster
     {
         private readonly SerialSettings serial = new SerialSettings();
         private readonly List<IoControl> controls = new List<IoControl>();
-        private ModbusMaster master;
-        private ThreadRunner ior;
-        private ControlRunner uir;
+        private readonly ControlContext context = new ControlContext();
 
         public ModbusControl()
         {
             InitializeComponent();
         }
+
         public void Unload()
         {
-            ior.Dispose(IoDispose);
+            context.Dispose();
         }
 
-        public void FromUI(SessionSettings config)
+        public void FromUI(MasterDto dto)
         {
-            config.Serial = serial;
-            config.SerialPortName = comboBoxSerialPortName.Text;
-            config.TcpIP = textBoxTcpIP.Text;
-            config.TcpPort = (int)numericUpDownTcpPort.Value;
+            dto.Serial = serial;
+            dto.SerialPortName = comboBoxSerialPortName.Text;
+            dto.TcpIP = textBoxTcpIP.Text;
+            dto.TcpPort = (int)numericUpDownTcpPort.Value;
             foreach (var control in panelContainer.Controls)
             {
                 var wrapper = (WrapperControl)control;
@@ -40,20 +37,79 @@ namespace SharpMaster
                 var settings = payload.GetSettings();
                 settings.Put("$Type", payload.GetType().Name);
                 settings.Put("$Name", name);
-                config.Controls.Add(settings);
+                dto.Controls.Add(settings);
             }
         }
 
-        public void ToUI(SessionSettings config)
+        public void ToUI(MasterDto dto)
         {
-            config.Serial.CopyTo(serial);
-            comboBoxSerialPortName.Text = config.SerialPortName;
-            textBoxTcpIP.Text = config.TcpIP;
-            numericUpDownTcpPort.Value = config.TcpPort;
-            foreach (var settings in config.Controls)
+            dto.Serial.CopyTo(serial);
+            comboBoxSerialPortName.Text = dto.SerialPortName;
+            textBoxTcpIP.Text = dto.TcpIP;
+            numericUpDownTcpPort.Value = dto.TcpPort;
+            foreach (var settings in dto.Controls)
             {
                 AddControl(settings.Get("$Type"), settings);
             }
+        }
+
+        private void RemoveControl(Control control)
+        {
+            controls.Remove((IoControl)control);
+            panelContainer.Controls.Remove(control);
+        }
+
+        private void AddControl(string name, SerializableMap settings = null)
+        {
+            settings = settings ?? new SerializableMap();
+            var control = CreateControl(name, settings);
+            var wrapper = new WrapperControl(control, RemoveControl)
+            {
+                ItemName = settings.GetString("$Name", "NO NAME")
+            };
+            panelContainer.Controls.Add(wrapper);
+            var ioc = control as IoControl;
+            ioc.Enable(false);
+            controls.Add(ioc);
+        }
+
+        private Control CreateControl(string name, SerializableMap settings)
+        {
+            switch (name)
+            {
+                case "WritePointControl":
+                    return new WritePointControl(context, settings);
+                case "ReadPointControl":
+                    return new ReadPointControl(context, settings);
+                case "ReadRegisterControl":
+                    return new ReadRegisterControl(context, settings);
+                case "WriteRegisterControl":
+                    return new WriteRegisterControl(context, settings);
+                case "ReadFloatControl":
+                    return new ReadFloatControl(context, settings);
+                case "WriteFloatControl":
+                    return new WriteFloatControl(context, settings);
+            }
+            Thrower.Throw("Unknown control name {0}", name);
+            return null;
+        }
+
+        private void EnableControls(bool closed)
+        {
+            linkLabelSerialRefresh.Enabled = closed;
+            comboBoxSerialPortName.Enabled = closed;
+            buttonOpenSerial.Enabled = closed;
+            buttonSetupSerial.Enabled = closed;
+            textBoxTcpIP.Enabled = closed;
+            numericUpDownTcpPort.Enabled = closed;
+            buttonOpenSocket.Enabled = closed;
+            buttonClose.Enabled = !closed;
+            buttonWriteFloat.Enabled = closed;
+            buttonWritePoint.Enabled = closed;
+            buttonWriteRegister.Enabled = closed;
+            buttonReadFloat.Enabled = closed;
+            buttonReadPoint.Enabled = closed;
+            buttonReadRegister.Enabled = closed;
         }
 
         private void RefreshSerials()
@@ -67,22 +123,9 @@ namespace SharpMaster
             comboBoxSerialPortName.Text = current;
         }
 
-        private void EnableControls(bool closed)
-        {
-            linkLabelSerialRefresh.Enabled = closed;
-            comboBoxSerialPortName.Enabled = closed;
-            buttonOpenSerial.Enabled = closed;
-            buttonSetupSerial.Enabled = closed;
-            textBoxTcpIP.Enabled = closed;
-            numericUpDownTcpPort.Enabled = closed;
-            buttonOpenSocket.Enabled = closed;
-            buttonClose.Enabled = !closed;
-        }
-
         private void Log(string type, string format, params object[] args)
         {
-            if (args.Length > 0)
-                format = string.Format(format, args);
+            if (args.Length > 0) format = string.Format(format, args);
             var color = Color.White;
             switch (type)
             {
@@ -111,62 +154,6 @@ namespace SharpMaster
             richTextBoxLog.ScrollToCaret();
         }
 
-        private void Log(char prefix, byte[] bytes, int count)
-        {
-            var sb = new StringBuilder();
-            sb.Append(prefix);
-            for (var i = 0; i < count; i++)
-            {
-                var b = bytes[i];
-                if (i > 0)
-                    sb.Append(" ");
-                sb.Append(b.ToString("X2"));
-            }
-            Log(prefix.ToString(), sb.ToString());
-        }
-
-        private Control CreateControl(string name, SerializableMap settings)
-        {
-            var context = new ControlContext
-            {
-                ioRunner = ior,
-                uiRunner = uir
-            };
-            switch (name)
-            {
-                case "WritePointControl":
-                    return new WritePointControl(context, settings);
-                case "ReadPointControl":
-                    return new ReadPointControl(context, settings);
-                case "ReadRegisterControl":
-                    return new ReadRegisterControl(context, settings);
-                case "WriteRegisterControl":
-                    return new WriteRegisterControl(context, settings);
-                case "ReadFloatControl":
-                    return new ReadFloatControl(context, settings);
-                case "WriteFloatControl":
-                    return new WriteFloatControl(context, settings);
-            }
-            Thrower.Throw("Unknown control name {0}", name);
-            return null;
-        }
-
-        private void AddControl(string name, SerializableMap settings = null)
-        {
-            settings = settings ?? new SerializableMap();
-            var control = CreateControl(name, settings);
-            var wrapper = new WrapperControl(control, () => ior.Run(() => controls.Remove((IoControl)control)))
-            {
-                ItemName = settings.GetString("$Name", "NO NAME")
-            };
-            panelContainer.Controls.Add(wrapper);
-            ior.Run(() => {
-                var ioc = (IoControl)control;
-                ioc.SetMaster(master);
-                controls.Add(ioc);
-            });
-        }
-
         private void MoveTo(WrapperControl wrapper, Point point)
         {
             var control = panelContainer.GetChildAtPoint(point);
@@ -181,42 +168,57 @@ namespace SharpMaster
             }
         }
 
-        private void IoSetMaster(ModbusMaster current)
+        private void Connected(bool connected)
         {
-            master = current;
+            EnableControls(!connected);
             foreach (var control in controls)
             {
-                control.SetMaster(current);
+                control.Enable(connected);
             }
-        }
-
-        private void IoDispose()
-        {
-            Disposer.Dispose(master);
-        }
-
-        private void IoClose()
-        {
-            IoDispose();
-            IoSetMaster(null);
-            uir.Run(() => EnableControls(true));
-        }
-
-        private void IoLog(char prefix, byte[] bytes, int count)
-        {
-            uir.Run(() => Log(prefix, bytes, count));
         }
 
         void ModbusControl_Load(object sender, EventArgs e)
         {
-            uir = new ControlRunner(this);
-            ior = new ThreadRunner("IO", (Exception ex) => {
-                IoClose();
-                uir.Run(() => Log("error", "Error: {0}", ex.Message));
-            });
+            context.Setup(this, Connected, (t, m) => Log(t,m));
             RefreshSerials();
-            EnableControls(true);
+            Connected(false);
             timer.Enabled = pollCheckBox.Checked;
+        }
+
+        void ButtonOpenSerialClick(object sender, EventArgs e)
+        {
+            var name = comboBoxSerialPortName.Text;
+            var config = new SerialSettings();
+            serial.CopyTo(config);
+            EnableControls(false);
+            context.OpenSerial(name, config);
+        }
+
+        void ButtonOpenSocketClick(object sender, EventArgs e)
+        {
+            var host = textBoxTcpIP.Text;
+            var port = (int)numericUpDownTcpPort.Value;
+            EnableControls(false);
+            context.OpenSocket(host, port);
+        }
+
+        void ButtonCloseClick(object sender, EventArgs e)
+        {
+            context.Close();
+        }
+
+        void Timer_Tick(object sender, EventArgs e)
+        {
+            timer.Enabled = false;
+            foreach (var control in controls)
+            {
+                control.Perform();
+            }
+            context.Io(() => {
+                context.Ui(() => {
+                    timer.Enabled = pollCheckBox.Checked;
+                });
+            });
         }
 
         void ButtonWritePointClick(object sender, EventArgs e)
@@ -266,41 +268,6 @@ namespace SharpMaster
             setup.ShowDialog();
         }
 
-        void ButtonOpenSerialClick(object sender, EventArgs e)
-        {
-            var name = comboBoxSerialPortName.Text;
-            EnableControls(false);
-            ior.Run(() => {
-                var serialPort = new SerialPort(name);
-                serial.CopyTo(serialPort);
-                serialPort.Open();
-                var stream = new ModbusSerialStream(serialPort, 1000, IoLog);
-                var protocol = new ModbusRTUProtocol();
-                IoSetMaster(new ModbusMaster(stream, protocol));
-                uir.Run(() => Log("success", "Serial {0}@{1} open", name, serial.BaudRate));
-            });
-        }
-
-        void ButtonOpenSocketClick(object sender, EventArgs e)
-        {
-            var host = textBoxTcpIP.Text;
-            var port = (int)numericUpDownTcpPort.Value;
-            EnableControls(false);
-            ior.Run(() => {
-                //standalone app maybe closed anytime so default timeout
-                var socket = Sockets.ConnectWithTimeout(host, port, 400);
-                var stream = new ModbusSocketStream(socket, 400, IoLog);
-                var protocol = new ModbusTCPProtocol();
-                IoSetMaster(new ModbusMaster(stream, protocol));
-                uir.Run(() => Log("success", "Socket {0}:{1} open", host, port));
-            });
-        }
-
-        void ButtonCloseClick(object sender, EventArgs e)
-        {
-            ior.Run(IoClose);
-        }
-
         void PanelContainerDragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(WrapperControl)))
@@ -328,22 +295,6 @@ namespace SharpMaster
             var wrapper = (WrapperControl)e.Data.GetData(typeof(WrapperControl));
             wrapper.BackColor = Color.White;
             MoveTo(wrapper, p);
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            timer.Enabled = false;
-            foreach (var control in panelContainer.Controls)
-            {
-                var wrapper = (WrapperControl)control;
-                var payload = (IoControl)wrapper.Payload;
-                payload.Perform();
-            }
-            ior.Run(()=> {
-                uir.Run(()=> {
-                    timer.Enabled = pollCheckBox.Checked;
-                });
-            });
         }
 
         private void PollCheckBox_CheckedChanged(object sender, EventArgs e)

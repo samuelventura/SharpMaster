@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 
 namespace SharpMaster.Tools
 {
@@ -25,15 +24,6 @@ namespace SharpMaster.Tools
         {
             var message = args.Length > 0 ? string.Format(format, args) : format;
             return new Exception(message, inner);
-        }
-
-        public static void Dump(Exception ex)
-        {
-            var folder = Executable.Relative("Exceptions");
-            Directory.CreateDirectory(folder);
-            var ts = DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
-            var fileName = string.Format("exception-{0}.txt", ts);
-            File.WriteAllText(Path.Combine(folder, fileName), ex.ToString());
         }
     }
 }

@@ -1,26 +1,23 @@
-﻿
-using System;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
-using SharpMaster.Tools;
+using SharpTabs;
 
 namespace SharpMaster
 {
-	internal sealed class Program
-	{
-		[STAThread]
-		private static void Main(string[] args)
-		{
-            var dbPath = args.Length > 0 ? args[0] : null;
-			Application.EnableVisualStyles();
-            Application.ThreadException += (s, t) =>
-            {
-                var msg = string.Format("{0} {1}", t.Exception.GetType().Name, t.Exception.Message);
-                Thrower.Dump(t.Exception);
-                MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            };
+    internal sealed class Program
+    {
+        [STAThread]
+        private static void Main(string[] args)
+        {
+            var path = args.Length > 0 ? args[0] : null;
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm(dbPath));
-		}
-		
-	}
+            var factory = new MasterFactory(path);
+            TabsTools.SetupCatcher(factory.Name);
+            var form = new MainForm(factory);
+            form.Size = new Size(1200, 600);
+            Application.Run(form);
+        }
+    }
 }

@@ -31,13 +31,9 @@ namespace SharpMaster
 			return settings;
 		}
 		
-		public void SetMaster(ModbusMaster master)
+		public void Enable(bool enabled)
 		{
-			context.Master = master;
-			var enabled = (master != null);
-			context.uiRunner.Run(() => {
-				buttonRead.Enabled = enabled;        	
-			});
+			buttonRead.Enabled = enabled;        	
         }
 
         public void Perform()
@@ -50,16 +46,13 @@ namespace SharpMaster
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var startAddress = (ushort)numericUpDownRegisterAddress.Value;
 			var functionCode = comboBoxFunctionCode.SelectedIndex;
-			context.ioRunner.Run(() => {
-				if (context.Master != null) {
-                    context.EnsureDelay();
-                    var value = functionCode == 0 ? 
-					context.Master.ReadHoldingRegister(slaveAddress, startAddress) : 
-					context.Master.ReadInputRegister(slaveAddress, startAddress);
-					context.uiRunner.Run(() => {
-						labelRegisterValue.Text = value.ToString();
-					});
-				}
+			context.Io((master) => {
+                var value = functionCode == 0 ? 
+				master.ReadHoldingRegister(slaveAddress, startAddress) : 
+				master.ReadInputRegister(slaveAddress, startAddress);
+				context.Ui(() => {
+					labelRegisterValue.Text = value.ToString();
+				});
 			});
 		}
 	}

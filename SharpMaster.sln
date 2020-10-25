@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMaster", "SharpMaster\SharpMaster.csproj", "{DF644B41-5FE1-43CE-9FED-DEEAA88C2D38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpTabs", "SharpTabs\SharpTabs\SharpTabs.csproj", "{6C455F54-3BA2-4A71-9564-981F26940FB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DF644B41-5FE1-43CE-9FED-DEEAA88C2D38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF644B41-5FE1-43CE-9FED-DEEAA88C2D38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF644B41-5FE1-43CE-9FED-DEEAA88C2D38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C455F54-3BA2-4A71-9564-981F26940FB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C455F54-3BA2-4A71-9564-981F26940FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C455F54-3BA2-4A71-9564-981F26940FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C455F54-3BA2-4A71-9564-981F26940FB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

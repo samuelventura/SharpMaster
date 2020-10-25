@@ -1,7 +1,5 @@
-﻿
-using System;
+﻿using System;
 using System.Windows.Forms;
-using SharpModbus;
 using SharpMaster.Tools;
 
 namespace SharpMaster
@@ -34,13 +32,9 @@ namespace SharpMaster
             return settings;
 		}
 		
-		public void SetMaster(ModbusMaster master)
+		public void Enable(bool enabled)
 		{
-			context.Master = master;
-			var enabled = (master != null);
-			context.uiRunner.Run(() => {
-				buttonWrite.Enabled = enabled;        	
-			});
+			buttonWrite.Enabled = enabled;        	
         }
 
         public void Perform()
@@ -53,11 +47,9 @@ namespace SharpMaster
 			var startAddress = (ushort)numericUpDownRegisterAddress.Value;
 			var floatValue = numericUpDownFloatValue.Value;
             var functionCode = comboBoxFunctionCode.SelectedIndex;
-            context.ioRunner.Run(() => {
-				if (context.Master != null) {
-                    var value = FloatToByteArray((float)floatValue, functionCode);
-					context.Master.WriteRegisters(slaveAddress, startAddress, value);
-				}
+            context.Io((master) => {
+                var value = FloatToByteArray((float)floatValue, functionCode);
+				master.WriteRegisters(slaveAddress, startAddress, value);
 			});
         }
 

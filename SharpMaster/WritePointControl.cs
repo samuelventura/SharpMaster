@@ -1,18 +1,16 @@
-﻿
-using System;
+﻿using System;
 using System.Windows.Forms;
-using SharpModbus;
 
 namespace SharpMaster
 {
 	public partial class WritePointControl : UserControl, IoControl
 	{
-		private readonly ControlContext context;
+		private ControlContext context;
 		
 		public WritePointControl(ControlContext context, SerializableMap settings)
 		{
 			this.context = context;
-			
+
 			InitializeComponent();
 			
 			numericUpDownSlaveAddress.Value = settings.GetNumber("slaveAddress", 0);
@@ -29,14 +27,10 @@ namespace SharpMaster
 			return settings;
 		}
 		
-		public void SetMaster(ModbusMaster master)
+		public void Enable(bool enabled)
 		{
-			context.Master = master;
-			var enabled = (master != null);
-			context.uiRunner.Run(() => {
-				buttonOff.Enabled = enabled;
-				buttonOn.Enabled = enabled;            	
-			});
+			buttonOff.Enabled = enabled;
+			buttonOn.Enabled = enabled;            	
         }
 
         public void Perform()
@@ -47,10 +41,8 @@ namespace SharpMaster
 		{
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var coilAddress = (ushort)numericUpDownStartAddress.Value;
-			context.ioRunner.Run(() => {
-				if (context.Master != null) {
-					context.Master.WriteCoil(slaveAddress, coilAddress, true);
-				}
+			context.Io((master) => {
+				master.WriteCoil(slaveAddress, coilAddress, true);
 			});	
 		}
 		
@@ -58,10 +50,8 @@ namespace SharpMaster
 		{
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var startAddress = (ushort)numericUpDownStartAddress.Value;
-			context.ioRunner.Run(() => {
-				if (context.Master != null) {
-                    context.Master.WriteCoil(slaveAddress, startAddress, false);
-				}
+			context.Io((master) => {
+                master.WriteCoil(slaveAddress, startAddress, false);
 			});		
 		}
 	}

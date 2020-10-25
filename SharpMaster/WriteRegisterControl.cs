@@ -31,13 +31,9 @@ namespace SharpMaster
 			return settings;
 		}
 		
-		public void SetMaster(ModbusMaster master)
+		public void Enable(bool enabled)
 		{
-			context.Master = master;
-			var enabled = (master != null);
-			context.uiRunner.Run(() => {
-				buttonWrite.Enabled = enabled;        	
-			});
+			buttonWrite.Enabled = enabled;        	
         }
 
         public void Perform()
@@ -49,10 +45,8 @@ namespace SharpMaster
 			var slaveAddress = (byte)numericUpDownSlaveAddress.Value;
 			var startAddress = (ushort)numericUpDownRegisterAddress.Value;
 			var registerValue = (ushort)numericUpDownRegisterValue.Value;
-			context.ioRunner.Run(() => {
-				if (context.Master != null) {
-                    context.Master.WriteRegister(slaveAddress, startAddress, registerValue);
-				}
+			context.Io((master) => {
+                master.WriteRegister(slaveAddress, startAddress, registerValue);
 			});
 		}
 	}
