@@ -16,7 +16,14 @@ namespace SharpMaster.Tools
 		{
 			CopyFrom(sp);
 		}
-		
+
+		public SerialSettings Clone()
+        {
+			var clone = new SerialSettings();
+			CopyTo(clone);
+			return clone;
+        }
+
 		public void CopyFrom(SerialPort sp)
 		{
 			BaudRate = sp.BaudRate;

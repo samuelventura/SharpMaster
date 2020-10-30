@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using SharpMaster.Tools;
 using SharpTabs;
 
 namespace SharpMaster
@@ -56,6 +55,12 @@ namespace SharpMaster
         public void Save(SessionDto[] dtos)
         {
             Save(path, dtos);
+        }
+
+        public void Setup(Control obj)
+        {
+            var control = obj as ModbusControl;
+            control.Setup();
         }
 
         public void Save(string path, SessionDto[] dtos)

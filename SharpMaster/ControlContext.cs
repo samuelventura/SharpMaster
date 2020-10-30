@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.IO.Ports;
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
 using SharpMaster.Tools;
 using SharpModbus;
 
@@ -10,11 +10,14 @@ namespace SharpMaster
 {
 	public class ControlContext : IDisposable
     {
+        public MasterConfig Config = new MasterConfig();
         private Action<string, string> log;
         private Action<bool> connected;
         private ModbusMaster master;
         private ControlRunner uir;
         private ThreadRunner ior;
+        private DateTime start;
+        private DateTime last;
 
         public void Setup(Control control, Action<bool> connected, Action<string, string> log)
         {
@@ -24,16 +27,18 @@ namespace SharpMaster
             this.ior = new ThreadRunner("IO", IoException);
         }
 
-        public void OpenSerial(string name, SerialSettings config)
+        public void OpenSerial(string name, SerialSettings serial)
         {
             Io(() => {
                 var serialPort = new SerialPort(name);
-                config.CopyTo(serialPort);
+                serial.CopyTo(serialPort);
                 serialPort.Open();
-                var stream = new ModbusSerialStream(serialPort, 1000, StreamLog);
+                var stream = new ModbusSerialStream(serialPort, Config.FixedTimeout(), StreamLog);
                 var protocol = new ModbusRTUProtocol();
                 master = new ModbusMaster(stream, protocol);
-                Log("success", "Serial {0}@{1} open", name, config.BaudRate);
+                start = DateTime.Now;
+                last = DateTime.Now;
+                Log("success", "Serial {0}@{1} open", name, serial.BaudRate);
                 Ui(() => { connected(true); });
             });
         }
@@ -42,10 +47,12 @@ namespace SharpMaster
         {
             Io(() => {
                 //standalone app maybe closed anytime so default timeout
-                var socket = Sockets.ConnectWithTimeout(host, port, 400);
-                var stream = new ModbusSocketStream(socket, 400, StreamLog);
+                var socket = Sockets.ConnectWithTimeout(host, port, Config.FixedConnect());
+                var stream = new ModbusSocketStream(socket, Config.FixedTimeout(), StreamLog);
                 var protocol = new ModbusTCPProtocol();
                 master = new ModbusMaster(stream, protocol);
+                start = DateTime.Now;
+                last = DateTime.Now;
                 Log("success", "Socket {0}:{1} open", host, port);
                 Ui(() => { connected(true); });
             });
@@ -54,6 +61,7 @@ namespace SharpMaster
         public void Close()
         {
             Io(() => {
+                if (master != null) LogDuration();
                 Disposer.Dispose(master);
                 master = null;
                 Ui(() => { connected(false); });
@@ -82,9 +90,12 @@ namespace SharpMaster
             Io(() => {
                 var master = this.master;
                 if (master == null) return;
-                //SELEC requires 20ms between calls
-                Thread.Sleep(20);
+                var df = DateTime.Now - last;
+                var ms = Config.FixedDelay() - df.TotalMilliseconds;
+                if (ms > 0) Thread.Sleep((int)ms);
+                last = DateTime.Now; //least it fails
                 callback(master);
+                last = DateTime.Now;
             });
         }
 
@@ -95,9 +106,17 @@ namespace SharpMaster
             ior.Run(callback);
         }
 
+        private void LogDuration()
+        {
+            var ts = DateTime.Now - start;
+            Log("Info", "Session duration {0:0.0}s", ts.TotalSeconds);
+        }
+
         private void IoException(Exception ex)
         {
+            if (master != null) LogDuration();
             Log("error", "Error: {0}", ex.Message);
+            if (Config.ShowStacktrace) Log("debug", "{0}", ex.ToString());
             Disposer.Dispose(master);
             master = null;
             Ui(() => { connected(false); });

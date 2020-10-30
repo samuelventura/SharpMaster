@@ -303,13 +303,13 @@
             // 
             this.flowLayoutPanelButtons.AutoSize = true;
             this.flowLayoutPanelButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelButtons.Controls.Add(this.pollCheckBox);
             this.flowLayoutPanelButtons.Controls.Add(this.buttonReadPoint);
             this.flowLayoutPanelButtons.Controls.Add(this.buttonWritePoint);
             this.flowLayoutPanelButtons.Controls.Add(this.buttonReadRegister);
             this.flowLayoutPanelButtons.Controls.Add(this.buttonWriteRegister);
             this.flowLayoutPanelButtons.Controls.Add(this.buttonReadFloat);
             this.flowLayoutPanelButtons.Controls.Add(this.buttonWriteFloat);
+            this.flowLayoutPanelButtons.Controls.Add(this.pollCheckBox);
             this.flowLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
@@ -319,17 +319,19 @@
             // pollCheckBox
             // 
             this.pollCheckBox.AutoSize = true;
-            this.pollCheckBox.Location = new System.Drawing.Point(3, 3);
+            this.pollCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pollCheckBox.Location = new System.Drawing.Point(591, 3);
             this.pollCheckBox.Name = "pollCheckBox";
-            this.pollCheckBox.Size = new System.Drawing.Size(75, 17);
+            this.pollCheckBox.Size = new System.Drawing.Size(75, 24);
             this.pollCheckBox.TabIndex = 19;
             this.pollCheckBox.Text = "Poll Inputs";
+            this.pollCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.pollCheckBox.UseVisualStyleBackColor = true;
             this.pollCheckBox.CheckedChanged += new System.EventHandler(this.PollCheckBox_CheckedChanged);
             // 
             // buttonReadPoint
             // 
-            this.buttonReadPoint.Location = new System.Drawing.Point(83, 2);
+            this.buttonReadPoint.Location = new System.Drawing.Point(2, 2);
             this.buttonReadPoint.Margin = new System.Windows.Forms.Padding(2);
             this.buttonReadPoint.Name = "buttonReadPoint";
             this.buttonReadPoint.Size = new System.Drawing.Size(94, 26);
@@ -340,7 +342,7 @@
             // 
             // buttonWritePoint
             // 
-            this.buttonWritePoint.Location = new System.Drawing.Point(181, 2);
+            this.buttonWritePoint.Location = new System.Drawing.Point(100, 2);
             this.buttonWritePoint.Margin = new System.Windows.Forms.Padding(2);
             this.buttonWritePoint.Name = "buttonWritePoint";
             this.buttonWritePoint.Size = new System.Drawing.Size(94, 26);
@@ -351,7 +353,7 @@
             // 
             // buttonReadRegister
             // 
-            this.buttonReadRegister.Location = new System.Drawing.Point(279, 2);
+            this.buttonReadRegister.Location = new System.Drawing.Point(198, 2);
             this.buttonReadRegister.Margin = new System.Windows.Forms.Padding(2);
             this.buttonReadRegister.Name = "buttonReadRegister";
             this.buttonReadRegister.Size = new System.Drawing.Size(94, 26);
@@ -362,7 +364,7 @@
             // 
             // buttonWriteRegister
             // 
-            this.buttonWriteRegister.Location = new System.Drawing.Point(377, 2);
+            this.buttonWriteRegister.Location = new System.Drawing.Point(296, 2);
             this.buttonWriteRegister.Margin = new System.Windows.Forms.Padding(2);
             this.buttonWriteRegister.Name = "buttonWriteRegister";
             this.buttonWriteRegister.Size = new System.Drawing.Size(94, 26);
@@ -373,7 +375,7 @@
             // 
             // buttonReadFloat
             // 
-            this.buttonReadFloat.Location = new System.Drawing.Point(475, 2);
+            this.buttonReadFloat.Location = new System.Drawing.Point(394, 2);
             this.buttonReadFloat.Margin = new System.Windows.Forms.Padding(2);
             this.buttonReadFloat.Name = "buttonReadFloat";
             this.buttonReadFloat.Size = new System.Drawing.Size(94, 26);
@@ -384,7 +386,7 @@
             // 
             // buttonWriteFloat
             // 
-            this.buttonWriteFloat.Location = new System.Drawing.Point(573, 2);
+            this.buttonWriteFloat.Location = new System.Drawing.Point(492, 2);
             this.buttonWriteFloat.Margin = new System.Windows.Forms.Padding(2);
             this.buttonWriteFloat.Name = "buttonWriteFloat";
             this.buttonWriteFloat.Size = new System.Drawing.Size(94, 26);

@@ -9,9 +9,11 @@ namespace SharpMaster
 {
     public partial class ModbusControl : UserControl
     {
+        private readonly SetupForm setup = new SetupForm();
         private readonly SerialSettings serial = new SerialSettings();
         private readonly List<IoControl> controls = new List<IoControl>();
         private readonly ControlContext context = new ControlContext();
+        private Button reconnect;
 
         public ModbusControl()
         {
@@ -26,6 +28,8 @@ namespace SharpMaster
         public void FromUI(MasterDto dto)
         {
             dto.Serial = serial;
+            dto.Config = context.Config.Clone();
+            dto.PollInputs = pollCheckBox.Checked;
             dto.SerialPortName = comboBoxSerialPortName.Text;
             dto.TcpIP = textBoxTcpIP.Text;
             dto.TcpPort = (int)numericUpDownTcpPort.Value;
@@ -44,12 +48,25 @@ namespace SharpMaster
         public void ToUI(MasterDto dto)
         {
             dto.Serial.CopyTo(serial);
+            context.Config = dto.Config.Clone();
+            timer.Interval = dto.Config.FixedTimer();
+            pollCheckBox.Checked = dto.PollInputs;
             comboBoxSerialPortName.Text = dto.SerialPortName;
             textBoxTcpIP.Text = dto.TcpIP;
             numericUpDownTcpPort.Value = dto.TcpPort;
             foreach (var settings in dto.Controls)
             {
                 AddControl(settings.Get("$Type"), settings);
+            }
+        }
+
+        public void Setup()
+        {
+            setup.Config = context.Config.Clone();
+            if (setup.ShowDialog() == DialogResult.OK)
+            {
+                context.Config = setup.Config.Clone();
+                timer.Interval = context.Config.FixedTimer();
             }
         }
 
@@ -103,13 +120,14 @@ namespace SharpMaster
             textBoxTcpIP.Enabled = closed;
             numericUpDownTcpPort.Enabled = closed;
             buttonOpenSocket.Enabled = closed;
-            buttonClose.Enabled = !closed;
             buttonWriteFloat.Enabled = closed;
             buttonWritePoint.Enabled = closed;
             buttonWriteRegister.Enabled = closed;
             buttonReadFloat.Enabled = closed;
             buttonReadPoint.Enabled = closed;
             buttonReadRegister.Enabled = closed;
+            //close always enabled to avoid reconnect flicker
+            //buttonClose.Enabled = !closed;
         }
 
         private void RefreshSerials()
@@ -175,6 +193,10 @@ namespace SharpMaster
             {
                 control.Enable(connected);
             }
+            if (!connected && reconnect!=null && context.Config.Reconnect)
+            {
+                reconnect.PerformClick();
+            }
         }
 
         void ModbusControl_Load(object sender, EventArgs e)
@@ -187,15 +209,15 @@ namespace SharpMaster
 
         void ButtonOpenSerialClick(object sender, EventArgs e)
         {
+            reconnect = buttonOpenSerial;
             var name = comboBoxSerialPortName.Text;
-            var config = new SerialSettings();
-            serial.CopyTo(config);
             EnableControls(false);
-            context.OpenSerial(name, config);
+            context.OpenSerial(name, serial.Clone());
         }
 
         void ButtonOpenSocketClick(object sender, EventArgs e)
         {
+            reconnect = buttonOpenSocket;
             var host = textBoxTcpIP.Text;
             var port = (int)numericUpDownTcpPort.Value;
             EnableControls(false);
@@ -204,6 +226,7 @@ namespace SharpMaster
 
         void ButtonCloseClick(object sender, EventArgs e)
         {
+            reconnect = null;
             context.Close();
         }
 

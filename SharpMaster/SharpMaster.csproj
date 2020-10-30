@@ -66,6 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetupForm.designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlContext.cs" />
     <Compile Include="ControlSettings.cs" />
     <Compile Include="IoControl.cs" />
@@ -76,6 +82,7 @@
     <Compile Include="ModbusControl.Designer.cs">
       <DependentUpon>ModbusControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="MasterConfig.cs" />
     <Compile Include="ReadFloatControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -160,6 +167,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModbusControl.resx">
       <DependentUpon>ModbusControl.cs</DependentUpon>
     </EmbeddedResource>
