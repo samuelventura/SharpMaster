@@ -1,36 +1,28 @@
-﻿
-using System;
+﻿using System;
 using System.Text;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace SharpMaster
 {
-	/// <summary>
-	/// Description of WrapperControl.
-	/// </summary>
 	public partial class WrapperControl : UserControl
 	{
-		private readonly Control payload;
-		private readonly Action<Control> action;
+		private readonly Action<WrapperControl> action;
+		private readonly Control control;
 		
-		public WrapperControl(Control payload, Action<Control> action)
+		public WrapperControl(Control control, Action<WrapperControl> action)
 		{
-			this.payload = payload;
+			this.control = control;
 			this.action = action;
 			
 			InitializeComponent();
 			
-			panelContainer.Controls.Add(payload);
-			labelTitle.Text = SplitTitle(payload.GetType().Name);
-			Height = payload.Height + panelTop.Height;
-			Width = payload.Width;
+			panelContainer.Controls.Add(control);
+			labelTitle.Text = SplitTitle(control.GetType().Name);
+			Height = control.Height + panelTop.Height;
+			Width = control.Width;
 		}
 		
-		public Control Payload {
-			get { return payload; }
-		}
+		public Control Control { get { return control; } }
 		
 		public string ItemName {
 			get { return labelName.Text; }

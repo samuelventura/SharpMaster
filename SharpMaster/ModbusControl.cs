@@ -32,7 +32,7 @@ namespace SharpMaster
             foreach (var control in panelContainer.Controls)
             {
                 var wrapper = (WrapperControl)control;
-                var payload = (IoControl)wrapper.Payload;
+                var payload = (IoControl)wrapper.Control;
                 var name = wrapper.ItemName;
                 var settings = payload.GetSettings();
                 settings.Put("$Type", payload.GetType().Name);
@@ -53,10 +53,10 @@ namespace SharpMaster
             }
         }
 
-        private void RemoveControl(Control control)
+        private void RemoveControl(WrapperControl wrapper)
         {
-            controls.Remove((IoControl)control);
-            panelContainer.Controls.Remove(control);
+            controls.Remove((IoControl)wrapper.Control);
+            panelContainer.Controls.Remove(wrapper);
         }
 
         private void AddControl(string name, SerializableMap settings = null)

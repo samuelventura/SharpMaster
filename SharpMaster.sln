@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMaster", "SharpMaster\SharpMaster.csproj", "{DF644B41-5FE1-43CE-9FED-DEEAA88C2D38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpTabs", "SharpTabs\SharpTabs\SharpTabs.csproj", "{6C455F54-3BA2-4A71-9564-981F26940FB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpTabs", "..\SharpTabs\SharpTabs\SharpTabs.csproj", "{6C455F54-3BA2-4A71-9564-981F26940FB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
