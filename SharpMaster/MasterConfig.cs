@@ -47,22 +47,22 @@ namespace SharpMaster
 
         public int FixedTimer()
         {
-            return Math.Max(TimerMs, 10);
+            return Math.Min(10000, Math.Max(TimerMs, 10));
         }
 
         public int FixedConnect()
         {
-            return Math.Max(ConnectMs, 100);
+            return Math.Min(10000, Math.Max(ConnectMs, 100));
         }
 
         public int FixedTimeout()
         {
-            return Math.Max(ConnectMs, 100);
+            return Math.Min(10000, Math.Max(TimeoutMs, 100));
         }
 
         public int FixedDelay()
         {
-            return Math.Max(DelayMs, 0);
+            return Math.Min(10000, Math.Max(DelayMs, 0));
         }
     }
 }
