@@ -28,6 +28,9 @@ namespace SharpMaster
         [Category("Session")]
         [DisplayName("Show stacktrace")]
         public bool ShowStacktrace { get; set; } = false;
+        [Category("Session")]
+        [DisplayName("Show packets")]
+        public bool ShowPackets { get; set; } = true;
 
         public MasterConfig Clone()
         {
@@ -38,6 +41,7 @@ namespace SharpMaster
             clone.TimerMs = TimerMs;
             clone.Reconnect = Reconnect;
             clone.ShowStacktrace = ShowStacktrace;
+            clone.ShowPackets = ShowPackets;
             return clone;
         }
 

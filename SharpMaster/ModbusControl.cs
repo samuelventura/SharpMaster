@@ -143,6 +143,13 @@ namespace SharpMaster
 
         private void Log(string type, string format, params object[] args)
         {
+            switch (type)
+            {
+                case "<":
+                case ">":
+                    if (!context.Config.ShowPackets) return;
+                    break;
+            }
             if (args.Length > 0) format = string.Format(format, args);
             var color = Color.White;
             switch (type)
@@ -201,7 +208,7 @@ namespace SharpMaster
 
         void ModbusControl_Load(object sender, EventArgs e)
         {
-            context.Setup(this, Connected, (t, m) => Log(t,m));
+            context.Setup(this, Connected, (t, m) => Log(t, m));
             RefreshSerials();
             Connected(false);
             timer.Enabled = pollCheckBox.Checked;
