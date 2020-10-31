@@ -14,11 +14,11 @@ namespace SharpMaster
         public int ConnectMs { get; set; } = 2000;
 
         [Category("Session")]
-        [DisplayName("Frame Separation (ms)")]
+        [DisplayName("Frame separation (ms)")]
         public int DelayMs { get; set; } = 10;
 
         [Category("Session")]
-        [DisplayName("Poll Interval (ms)")]
+        [DisplayName("Poll interval (ms)")]
         public int TimerMs { get; set; } = 100;
 
         [Category("Session")]
@@ -28,9 +28,14 @@ namespace SharpMaster
         [Category("Session")]
         [DisplayName("Show stacktrace")]
         public bool ShowStacktrace { get; set; } = false;
+
         [Category("Session")]
         [DisplayName("Show packets")]
         public bool ShowPackets { get; set; } = true;
+
+        [Category("Session")]
+        [DisplayName("RTU over socket")]
+        public bool RtuOverSocket { get; set; } = false;
 
         public MasterConfig Clone()
         {
@@ -42,6 +47,7 @@ namespace SharpMaster
             clone.Reconnect = Reconnect;
             clone.ShowStacktrace = ShowStacktrace;
             clone.ShowPackets = ShowPackets;
+            clone.RtuOverSocket = RtuOverSocket;
             return clone;
         }
 

@@ -49,8 +49,7 @@ namespace SharpMaster
                 //standalone app maybe closed anytime so default timeout
                 var socket = Sockets.ConnectWithTimeout(host, port, Config.FixedConnect());
                 var stream = new ModbusSocketStream(socket, Config.FixedTimeout(), StreamLog);
-                var protocol = new ModbusTCPProtocol();
-                master = new ModbusMaster(stream, protocol);
+                master = new ModbusMaster(stream, SocketProtocol());
                 start = DateTime.Now;
                 last = DateTime.Now;
                 Log("success", "Socket {0}:{1} open", host, port);
@@ -104,6 +103,12 @@ namespace SharpMaster
             var ior = this.ior;
             if (ior == null) return;
             ior.Run(callback);
+        }
+
+        private IModbusProtocol SocketProtocol()
+        {
+            if (Config.RtuOverSocket) return new ModbusRTUProtocol();
+            return new ModbusTCPProtocol();
         }
 
         private void LogDuration()
