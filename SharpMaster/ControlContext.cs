@@ -2,6 +2,7 @@
 using System.Text;
 using System.IO.Ports;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using SharpMaster.Tools;
 using SharpModbus;
@@ -30,6 +31,7 @@ namespace SharpMaster
         public void OpenSerial(string name, SerialSettings serial)
         {
             Io(() => {
+                if (uir == null) return; //disposed
                 var serialPort = new SerialPort(name);
                 serial.CopyTo(serialPort);
                 serialPort.Open();
@@ -46,7 +48,7 @@ namespace SharpMaster
         public void OpenSocket(string host, int port)
         {
             Io(() => {
-                //standalone app maybe closed anytime so default timeout
+                if (uir == null) return; //disposed
                 var socket = Sockets.ConnectWithTimeout(host, port, Config.FixedConnect());
                 var stream = new ModbusSocketStream(socket, Config.FixedTimeout(), StreamLog);
                 master = new ModbusMaster(stream, SocketProtocol());
@@ -71,10 +73,13 @@ namespace SharpMaster
         {
             var ior = this.ior;
             if (ior == null) return;
-            ior.Dispose(() => {
+            ior.Run(() => {
                 Disposer.Dispose(master);
                 master = null;
+                uir = null; //disposed
             });
+            //fixes block on close while connected
+            Task.Run(ior.Dispose);
         }
 
         public void Ui(Action callback)

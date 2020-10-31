@@ -11,7 +11,7 @@ namespace SharpMaster
         
         public string Name => "SharpMaster";
         public string Ext => "SharpMaster";
-        public string Title => "SharpMaster - 1.0.7 https://github.com/samuelventura/SharpMaster";
+        public string Title => "SharpMaster - 1.0.8 https://github.com/samuelventura/SharpMaster";
         public string Status => path;
         public Icon Icon => Resource.Icon;
 
