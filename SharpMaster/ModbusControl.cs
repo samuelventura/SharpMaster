@@ -193,13 +193,14 @@ namespace SharpMaster
             }
         }
 
-        private void Connected(bool connected)
+        private void Connected(bool connected, bool cancelReconnect)
         {
             EnableControls(!connected);
             foreach (var control in controls)
             {
                 control.Enable(connected);
             }
+            if (cancelReconnect) reconnect = null;
             if (!connected && reconnect!=null && context.Config.Reconnect)
             {
                 reconnect.PerformClick();
@@ -210,7 +211,7 @@ namespace SharpMaster
         {
             context.Setup(this, Connected, (t, m) => Log(t, m));
             RefreshSerials();
-            Connected(false);
+            Connected(false, true);
             timer.Enabled = pollCheckBox.Checked;
         }
 

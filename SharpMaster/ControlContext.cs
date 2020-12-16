@@ -13,14 +13,14 @@ namespace SharpMaster
     {
         public MasterConfig Config = new MasterConfig();
         private Action<string, string> log;
-        private Action<bool> connected;
+        private Action<bool, bool> connected;
         private ModbusMaster master;
         private ControlRunner uir;
         private ThreadRunner ior;
         private DateTime start;
         private DateTime last;
 
-        public void Setup(Control control, Action<bool> connected, Action<string, string> log)
+        public void Setup(Control control, Action<bool, bool> connected, Action<string, string> log)
         {
             this.log = log;
             this.connected = connected;
@@ -41,7 +41,7 @@ namespace SharpMaster
                 start = DateTime.Now;
                 last = DateTime.Now;
                 Log("success", "Serial {0}@{1} open", name, serial.BaudRate);
-                Ui(() => { connected(true); });
+                Ui(() => { connected(true, false); });
             });
         }
 
@@ -55,7 +55,7 @@ namespace SharpMaster
                 start = DateTime.Now;
                 last = DateTime.Now;
                 Log("success", "Socket {0}:{1} open", host, port);
-                Ui(() => { connected(true); });
+                Ui(() => { connected(true, false); });
             });
         }
 
@@ -65,7 +65,7 @@ namespace SharpMaster
                 if (master != null) LogDuration();
                 Disposer.Dispose(master);
                 master = null;
-                Ui(() => { connected(false); });
+                Ui(() => { connected(false, true); });
             });
         }
 
@@ -124,12 +124,14 @@ namespace SharpMaster
 
         private void IoException(Exception ex)
         {
+            //first connection attempt should not reconnect
+            var cancelReconnect = (master == null);
             if (master != null) LogDuration();
             Log("error", "Error: {0}", ex.Message);
             if (Config.ShowStacktrace) Log("debug", "{0}", ex.ToString());
             Disposer.Dispose(master);
             master = null;
-            Ui(() => { connected(false); });
+            Ui(() => { connected(false, cancelReconnect); });
         }
 
         private void StreamLog(char prefix, byte[] bytes, int count)

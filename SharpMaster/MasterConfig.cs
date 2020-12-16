@@ -23,7 +23,7 @@ namespace SharpMaster
 
         [Category("Session")]
         [DisplayName("Auto reconnect")]
-        public bool Reconnect { get; set; } = true;
+        public bool Reconnect { get; set; } = false;
 
         [Category("Session")]
         [DisplayName("Show stacktrace")]
