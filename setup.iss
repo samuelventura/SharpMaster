@@ -3,7 +3,7 @@
 
 #define MyAppId "SharpMaster" 
 #define MyAppName "Sharp Master"
-#define MyAppVersion "1.0.9"
+#define MyAppVersion "1.0.10"
 #define MyAppPublisher "Samuel Ventura"
 #define MyAppURL "https://github.com/samuelventura/SharpMaster"
 
@@ -36,8 +36,9 @@ Source: "{#MyAppId}\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recur
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{#MyAppName} {#MyAppVersion}"; Filename: "{app}\{#MyAppId}.exe"; 
-Name: "{commondesktop}\{#MyAppName} {#MyAppVersion}"; Filename: "{app}\{#MyAppId}.exe";
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppId}.exe"; 
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppId}.exe";
+;Version in icon leaves previous link when upgrading
 
 [Registry]
 Root: HKCR; Subkey: ".SharpMaster";                     ValueData: "{#MyAppName}";                     Flags: uninsdeletevalue; ValueType: string;  ValueName: ""
