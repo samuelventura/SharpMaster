@@ -3,7 +3,7 @@
 
 #define MyAppId "SharpMaster" 
 #define MyAppName "Sharp Master"
-#define MyAppVersion "1.0.10"
+#define MyAppVersion "1.0.11"
 #define MyAppPublisher "Samuel Ventura"
 #define MyAppURL "https://github.com/samuelventura/SharpMaster"
 
