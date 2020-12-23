@@ -62,12 +62,8 @@ namespace SharpMaster
 
         public void Setup()
         {
-            setup.Config = context.Config.Clone();
-            if (setup.ShowDialog() == DialogResult.OK)
-            {
-                context.Config = setup.Config.Clone();
-                timer.Interval = context.Config.FixedTimer();
-            }
+            context.Config = setup.Edit(context.Config);
+            timer.Interval = context.Config.FixedTimer();
         }
 
         private void RemoveControl(WrapperControl wrapper)
@@ -295,8 +291,7 @@ namespace SharpMaster
 
         void ButtonSetupSerialClick(object sender, EventArgs e)
         {
-            var setup = new SerialSettingsForm(serial);
-            setup.ShowDialog();
+            setup.Edit(serial);
         }
 
         void PanelContainerDragEnter(object sender, DragEventArgs e)

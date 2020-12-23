@@ -32,7 +32,6 @@ namespace SharpMaster
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetupForm));
             this.panelButton = new System.Windows.Forms.Panel();
             this.buttonOk = new System.Windows.Forms.Button();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
@@ -62,7 +61,6 @@ namespace SharpMaster
             this.buttonOk.TabIndex = 0;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
-            this.buttonOk.Click += new System.EventHandler(this.ButtonOkClick);
             // 
             // propertyGrid
             // 
@@ -94,7 +92,6 @@ namespace SharpMaster
             this.ClientSize = new System.Drawing.Size(348, 413);
             this.Controls.Add(this.propertyGrid);
             this.Controls.Add(this.panelButton);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SetupForm";

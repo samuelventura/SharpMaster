@@ -4,7 +4,7 @@ using SharpTabs;
 
 namespace SharpMaster
 {
-	public class MasterDto : SessionDto
+	public class MasterDto : ISessionDto
 	{
         public MasterDto()
         {

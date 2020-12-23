@@ -79,7 +79,7 @@ namespace SharpMaster
                 uir = null; //disposed
             });
             //fixes block on close while connected
-            Task.Run(ior.Dispose);
+            Task.Factory.StartNew(ior.Dispose);
         }
 
         public void Ui(Action callback)

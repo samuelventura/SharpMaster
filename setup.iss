@@ -3,7 +3,7 @@
 
 #define MyAppId "SharpMaster" 
 #define MyAppName "Sharp Master"
-#define MyAppVersion "1.0.11"
+#define MyAppVersion GetFileVersion('SharpMaster\bin\Release\net40\SharpMaster.exe')
 #define MyAppPublisher "Samuel Ventura"
 #define MyAppURL "https://github.com/samuelventura/SharpMaster"
 
@@ -32,7 +32,7 @@ ChangesAssociations = yes
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "{#MyAppId}\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#MyAppId}\bin\Release\net40\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

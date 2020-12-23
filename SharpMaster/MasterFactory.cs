@@ -5,15 +5,17 @@ using SharpTabs;
 
 namespace SharpMaster
 {
-    public class MasterFactory : SessionFactory
+    public class MasterFactory : ISessionFactory
     {
         private readonly string path;
         
         public string Name => "SharpMaster";
         public string Ext => "SharpMaster";
-        public string Title => "SharpMaster - 1.0.11 https://github.com/samuelventura/SharpMaster";
+        public string Title => $"SharpMaster - {Version} {Home}";
         public string Status => path;
-        public Icon Icon => Resource.Icon;
+        public Icon Icon => TabsTools.ExeIcon();
+        private string Version => Tools.Executable.VersionString();
+        private string Home => "https://github.com/samuelventura/SharpMaster";
 
         public bool HasSetup => true;
 
@@ -22,12 +24,12 @@ namespace SharpMaster
             this.path = path ?? SessionDao.DefaultPath(Name);
         }
 
-        public SessionDto[] Load()
+        public ISessionDto[] Load()
         {
             return Load(path);
         }
 
-        public SessionDto[] Load(string path)
+        public ISessionDto[] Load(string path)
         {
             SessionDao.Exec(path, (db) =>
             {
@@ -54,7 +56,7 @@ namespace SharpMaster
             control.Unload();
         }
 
-        public void Save(SessionDto[] dtos)
+        public void Save(ISessionDto[] dtos)
         {
             Save(path, dtos);
         }
@@ -65,7 +67,7 @@ namespace SharpMaster
             control.Setup();
         }
 
-        public void Save(string path, SessionDto[] dtos)
+        public void Save(string path, ISessionDto[] dtos)
         {
             SessionDao.Save(path, dtos);
         }
@@ -74,11 +76,11 @@ namespace SharpMaster
         {
             return Wrap(new MasterDto
             {
-                Name = NewName()
+                Name = SessionDao.NewName()
             });
         }
 
-        public SessionDto Unwrap(Control obj)
+        public ISessionDto Unwrap(Control obj)
         {
             var control = obj as ModbusControl;
             var dto = new MasterDto
@@ -89,7 +91,7 @@ namespace SharpMaster
             return dto;
         }
 
-        public Control Wrap(SessionDto obj)
+        public Control Wrap(ISessionDto obj)
         {
             var dto = obj as MasterDto;
             var control = new ModbusControl
@@ -99,14 +101,6 @@ namespace SharpMaster
             };
             control.ToUI(dto);
             return control;
-        }
-
-        private static long count;
-
-        public static string NewName()
-        {
-            count++;
-            return $"Session {count}";
         }
     }
 }
